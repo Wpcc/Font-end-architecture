@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<body>
+	<button type="button">获取数据</button>
+	<p></p>
+</body>
+<script>
+	let oBtn = document.querySelector('button')
+	oBtn.addEventListener('click',function(){
+		ajax('get','http://127.0.0.1:3000',function(data){
+			console.log(data)
+			console.log(typeof data)
+			document.querySelector('p').innerHTML = JSON.parse(data).data
+		})
+	})
+	
+	let ajax = function(methods,url,callback){
+		// 第一步：创建XMLHttpRequest对象
+		let xhr = new XMLHttpRequest()
+		xhr.onreadystatechange = function(){ // 第二步：监听readystate事件变化
+			if(xhr.readyState == 4 && xhr.status == 200){
+				callback(xhr.responseText)
+			}
+		}
+		xhr.open(methods,url,true)
+		xhr.send()
+	}
+</script>
+</html>

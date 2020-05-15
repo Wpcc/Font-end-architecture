@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+	<h1></h1>
+	<input type="text">
+</body>
+<script>
+	/*
+		数据的双向绑定：view和model数据相关联
+		1.通过keyup事件实现
+	*/
+	let h1 = document.querySelector('h1')
+	var input = document.querySelector('input')
+
+	var vue = { // 数据
+	  key:'hello'
+	}
+
+	h1.innerHTML = vue.key
+	input.value = vue.key
+
+
+	input.addEventListener('keyup',function(){
+		vue.key = this.value
+		h1.innerHTML = this.value;
+	})
+</script>
+</html>

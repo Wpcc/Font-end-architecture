@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+	let xhr = new XMLHttpRequest()
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			console.log(xhr.responseText)
+		}
+	}
+	xhr.open('get','http://127.0.0.1:3000')
+	xhr.send()
+	
+	/*  onload的写法
+	 let xhr = new XMLHttpRequest()
+	 xhr.onload = function(){
+		 console.log(xhr.responseText)
+	 }
+	 xhr.open('get','http://127.0.0.1:3000')
+	 xhr.send()
+	 */
+</script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./lib/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-bind:value="msg">
+			<p v-bind:title='msg'>click here</p>
+			<!-- v-bind 简写 : -->
+			<input type="text" :value="msg">
+			<p :title='msg'>click here</p>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el:'#app',
+			data:{
+				msg:'hello'
+			}
+		})
+	</script>
+</html>

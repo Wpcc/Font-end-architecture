@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+	// 简单的ajax封装
+	let ajax = (methods,url) => {
+		let xhr = new XMLHttpRequest()
+		xhr.onload = () => {
+			console.log(xhr.responseText)
+		}
+		xhr.open(methods,url)
+		xhr.send()
+	}
+	ajax('get','http://127.0.0.1:3000')
+</script>
+</html>

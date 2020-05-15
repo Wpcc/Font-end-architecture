@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		const ajax = (methods,url,callback) => {
+			let xhr = new XMLHttpRequest()
+			xhr.onload = () => {
+				callback(xhr.responseText)
+			}
+			xhr.open(methods,url) // 第三个是否是异步 true代表异步 默认为true
+			xhr.send()
+		}
+		ajax('get','http://127.0.0.1:3000',function(data){
+			console.log(data)
+		})
+	</script>
+</html>

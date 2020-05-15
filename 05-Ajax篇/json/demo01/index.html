@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		let ajax = (methods,url,callback) => {
+			// 01 创建一个XMLHttpRequest实例
+			let xhr = new XMLHttpRequest()
+			xhr.onload = function(){
+				callback(this.responseText)
+			}
+			xhr.open(methods,url)
+			xhr.send()
+		}
+		
+		ajax('get','./data.json',function(data){
+			console.log(data)
+			console.log(typeof data) // string 字符串类型
+		})
+	</script>
+</html>

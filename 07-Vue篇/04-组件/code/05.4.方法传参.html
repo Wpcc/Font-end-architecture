@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <div @callback='change'>{{ msg }}</div>
+</div>
+</body>
+<script type="text/javascript">
+// this.$emit 其实是触发一个自定义事件
+var vm = new Vue({
+  el:'#app',
+  data:{
+    msg:'hello'
+  },
+  methods:{
+    change(){
+      this.msg = 'world'
+    }
+  },
+  mounted(){
+    this.$emit('callback','hello')
+  }
+})
+</script>
+</html>

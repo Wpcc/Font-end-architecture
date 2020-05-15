@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		let person = {
+			name:'Nicholas',
+			age:16
+		}
+		Object.defineProperty(person,'name',{
+			enumerable:false
+		})
+		for(item in person){
+			console.log(person.item) // 打印age
+		}
+	</script>
+</html>
