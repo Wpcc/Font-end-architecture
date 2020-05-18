@@ -187,7 +187,7 @@ call 实现的功能：
 call 函数实现的方法：
 
 - eval：最古老
-- join 或  toString：解决参数为数组问题
+- join 或  toString：解决参数为数组问题（**存在问题，会将数组里面的值转换为字符串**）
 
 ```javascript
 // eval
