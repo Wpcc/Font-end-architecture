@@ -228,6 +228,7 @@ Function.prototype.call3 = function(context){
 - 本质是隐式绑定
 - 当传递undefined或null时，this指向window
 - 参数只有两个：第一个是绑定对象，第二个是数组
+- 不直接使用arr（**字符串与数组拼接，本质上调用了数组的toString方法，也就是将数组中的参数转换为字符串**）
 
 ```javascript
 // eval
@@ -243,7 +244,7 @@ Function.prototype.apply2 = function(context,arr){
         for(var i = 0;i < arr.length ;i++){
        		args.push('arr[' + i + ']')     
         }
-        result = eval('context.fn(' + arr + ')')
+        result = eval('context.fn(' + args + ')')
     }
     
     delete context.fn
