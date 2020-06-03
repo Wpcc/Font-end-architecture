@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		// 创建一个对象
+		// 获取构造函数，更改对象上的原型
+		// 通过apply执行构造函数，
+		function newObj(){
+			// 创建对象
+			var obj = {}
+			var Constructor = [].shift.call(arguments)
+			// 改变this的指向
+			obj.__proto__ = Constructor.prototype
+			var result = Constructor.apply(obj,arguments)
+			// 返回对象
+			return type result == "object" ? result : obj
+		}
+		
+		function Person(name,age){
+			this.name = name
+			this.age = age
+		}
+		Person.prototype.say = function(){
+			console.log(this.name)
+		}
+		
+		var zs = new Person('zhangsan',14)
+		var ls = newObj(Person,'lisi',16)
+		var ww = newObj2(Person,'wangwu',17)
+		console.log(zs)
+		console.log(ls)
+		console.log(ww)
+		ww.say()
+	</script>
+</html>
