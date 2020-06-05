@@ -367,6 +367,29 @@ export {a,say,person}
 import {a,say,person} from './content.js'
 ```
 
+**默认导入导出：**
+
+- ES6模块中只有一个默认导出
+- 默认导出的值无法从内部修改（经代码验证）
+
+```javascript
+// 默认导出 comment.js
+export default let content = 'hello'
+```
+
+```javascript
+// export 写在底部
+let content = 'hello'
+export default {content}
+```
+
+```javascript
+// 默认导入 main.js : 默认导出的代码可以随意命名，并且无需加大括号
+import some from './comment.js'
+```
+
+当使用浏览器加载模块时，需要设置`type="module"`，并且无法使用本地文件，需要用服务器代理，这是因为设置`type="module"`后，script存在跨越。
+
 ### Promise 
 
 ### async 和 defer
@@ -553,4 +576,16 @@ console.log('this is b.js');
   - 第三方模块的加载不是通过路径，这点和加载我们自己定义的模块不同，任何第三方模块的名字和核心模块都不一样。
   - 第三方模块加载，会找到目录中的node-modules文件，如果没有会找上一级目录下的node-modules，直到根文件为止。
   - 在找到node-modules文件后，会进入到指定文件当中（如：art-template），在该指定目录中，通过main定位到引用文件，如果main错误，或者main中定义的文件不错在，会自动调用当前文件中的index.js文件，否则报错。
+
+### 区别
+
+CommonsJS值输出的是**值的拷贝**，这样当值为简单的数据类型的话，改变原始模块中的值，当前模块的值并不会有所变化，当然数据类型为引用类型（对象，数组，函数）则另算。
+
+ESM输出的则是值的**引用**。需要注意地是默认导出的值，内部无法修改（很奇怪）。
+
+ESM导出的值，在外部模块中无法修改，相当于用const定义。
+
+```javascript
+// comment.js
+```
 
