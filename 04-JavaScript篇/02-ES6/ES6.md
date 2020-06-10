@@ -14,25 +14,37 @@
 **let,const**
 
 - let 增加了块级作用域
+- 无法进行变量提升
+- 无法重复声明
 
 ```javascript
 // javascript 没有块级作用域，只有全局作用域和函数作用域
-var b = 6;
-if(b > 0){
-    var a = 3 
+if(true){
+    var a = 2 
+    let b = 3
 }
 console.log(a) // 输出3
+console.log(b) // b is not defined
 ```
 
-```java
-var b = 6;
-if(b > 0){
-    let a = 3
-}
-console.log(a) // a is not defined
+```javascript
+// 无法变量提升
+console.log(a) // undefined
+console.log(b) // Cannot access 'b' before initialization
+var a = 2
+let b = 3
 ```
 
-- const 增加定义的常量
+```javascript
+// 同一个作用域下无法重复声明
+let a = 2
+let a = 3
+// Identifier 'a' has already been declared
+```
+
+
+
+- const：在let的基础上，声明的变量内容无法修改
 
 ```javascript
 // 定义的变量可以修改
@@ -174,21 +186,21 @@ biggest(3,2,1,4)
 - 赋值
 
 ```javascript
-let cat = 'huahua'
-let dog = 'xiongxiong'
-let zoo = {cat:cat,dog:dog} // ES5
+let zs = 'zhangsan'
+let ls = 'lisi'
+let person = {zs:zs,ls:ls} // ES5
 
-let zoo = {cat,dog}  // ES6
+let person = {zs,ls}  // ES6
 ```
 
 - 取值
 
 ```javascript
-let zoo = {cat:'huahua',dog:'xiongxiong'}
-let cat = zoo.cat
-let dog = zoo.dog // ES5
+let person = {zs:'zhangsan',ls:'lisi'}
+let zs = person.zs
+let ls = person.ls // ES5
 
-let {cat,dog} = zoo // ES6
+let {zs,ls} = zoo // ES6
 ```
 
 ### 类

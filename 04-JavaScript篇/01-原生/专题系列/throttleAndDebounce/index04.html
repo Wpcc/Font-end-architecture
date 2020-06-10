@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		var name = 'global'
+		function foo(){
+			var name = 'foo'
+			return function(){
+				setTimeout(function(){
+					console.log(this)
+				},1000)
+			}
+		}
+		foo()()
+	</script>
+</html>

@@ -104,21 +104,43 @@ var name = 'global'
 function foo(){
 	console.log(this.name)
 }
+var obj = {
+    name:'obj',
+    foo:foo
+}
 function foo2(fn){ // 它会传一个函数，然后指向函数
     fn()
 }
-foo2(foo) // 打印 global
+foo2(obj.foo) // 打印 global
 ```
 
 ```javascript
 // 内置函数
 var name = 'global'
 function foo(){
-    var name = 'foo'
     console.log(this.name)
+}
+var obj = {
+    name:'obj',
+    foo:foo
 }
 setTimeout(foo,1000) // 'global'
 ```
+
+那么现在我们来看另一种情况：
+
+```javascript
+function foo(){
+    console.log(this)
+}
+var obj = {
+    foo:foo
+}
+
+document.addEventListener('click',obj.foo) // 打印document
+```
+
+这里可以看出，函数在赋值后，由document调用，故最终指向的是document。
 
 
 
@@ -232,7 +254,7 @@ Function.prototype.call3 = function(context){
 
 ```javascript
 // eval
-Function.prototype.apply2 = function(context,arr){
+Function.prototype.apply2 = function(context,arr){ // arr可以是数组也可以是类数组
     context = context || window
     context.fn = this
     var result
