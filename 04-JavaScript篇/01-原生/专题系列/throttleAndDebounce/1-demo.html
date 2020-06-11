@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1">
+    <title>节流和防抖</title>
+    <style>
+        #container{
+			width: 100%;
+			height: 200px;
+			line-height: 200px;
+			background-color: #555;
+			color: #fff;
+			text-align: center;
+		}
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+</body>
+<script>
+	var count = 1
+	var container = document.querySelector('#container')
+	function add(){
+		contaienr.innerHTML = count++
+	}
+	container.onmousemove = add
+</script>
+</html>

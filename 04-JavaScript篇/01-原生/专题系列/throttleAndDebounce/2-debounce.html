@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		// 最简单的防抖
+		function debounce(fn,interval){
+			var timer
+			return function(){
+				let context = this
+				let args = arguments
+				if(timer){
+					clearTimeout(timer)
+				}
+				setTimeout(function(){
+					fn.apply(this,args)
+				},interval)
+			}
+		}
+	</script>
+</html>

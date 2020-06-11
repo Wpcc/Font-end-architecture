@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				width: 100%;
+				height: 100%;
+				line-height: 100%;
+				background-color: #555;
+				text-align: center;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		// 最简单的节流
+		function throttle(fn,interval){
+			var last
+			return function(){
+				var context = this
+				var args = arguments
+				var now = + new Date()
+				if(now - last > interval){
+					last = now
+					fn.apply(context,args)
+				}
+			}
+		}
+	</script>
+</html>
