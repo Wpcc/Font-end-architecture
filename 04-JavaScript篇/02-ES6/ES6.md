@@ -91,19 +91,41 @@ console.log(a) // 带回车格式的 hello world！
 
 ### 函数
 
-**arrow function 又名箭头函数**
+**arrow function 又名箭头函数**，你可以将它当做ES5中匿名函数的简写。
 
-- 匿名函数简写
-  - 注意有返回值
-- 解决this指向问题
+- 参数部分
+  - 只有一个参数，可以省略`()`
+  - 无参数或多个参数，必须加`()`
+- 实体部分
+  - 只有一行语句，可以省略`{}`，**该写法会自动添加`return`语句**
+  - 多行语句，必须使用`{}`，该写法不会添加`return`语句
+
+- this
+  - 箭头函数的this指向上一层作用域
+
+**写法：**
+
+```javascript
+// 实体部分加括号和不加括号的区别在于返回值
+var fn = n => n
+var fn2 = n => {n}
+
+var num = fn(3)
+var num2 = fn2(4)
+
+console.log(num,num2) // 3 undefined
+```
+
+接下来我们来做个小练习，将下面ES5中的函数改写成ES6，实体部分**分别使用大括号和不加大括号**：
 
 ```javascript
 // 匿名函数的简化问题
 function(i){ // ES5
     return i + 1
 }
-(i) => { return i + 1} // ES6
 ```
+
+**this指向：**
 
 ```javascript
 // ES5 匿名函数指向window
@@ -132,6 +154,11 @@ var person = {
 }
 person.say() // person
 ```
+
+除此之外：
+
+- 箭头函数没有 arguments，可以使用 rest 获取参数代替
+- 箭头函数不能当做构造函数，即不能使用 new
 
 ### 参数
 
