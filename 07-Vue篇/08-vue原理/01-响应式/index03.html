@@ -59,16 +59,18 @@
 	let activeUpdate
 	
 	function autorun (update) {
+		// 执行了更新函数
 	  function wrappedUpdate () {
 	    activeUpdate = wrappedUpdate
-	    update() // 执行update的时候会触发depend依赖
+	    update() // 更新函数涉及到依赖
 	    activeUpdate = null
 	  }
 	  wrappedUpdate()
 	}
 	
 	const state = {
-		count:0
+		count:0,
+		count1:1
 	}
 	
 	observe(state) // 添加响应式和依赖

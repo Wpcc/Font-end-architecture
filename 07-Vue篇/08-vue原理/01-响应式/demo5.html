@@ -15,7 +15,14 @@
 		function update(){
 			b = a * 10
 		}
-		
+		let c
+		function update2(){
+			c = a * 20
+		}
+		// 执行更新函数
+		function autorun(update){
+			update()
+		}
 		// 响应式
 		function isObject(obj){
 			return typeof obj === 'object'
@@ -27,22 +34,25 @@
 			if(!isObject(obj)){
 				throw new TypeError()
 			}
+			let subs = []
 			Object.defineProperty(obj,key,{
 				get(){
 					return this.key
+					subs.push(autorun)
 				},
 				set(val){
 					this.key = val
 					// 执行update函数
-					update()
+					if(subs.length != 0){
+						subs.forEach(sub => sub())
+					}
 				}
 			})
 		}
 		
 		observer(state,'a')
-		state.a = 3
-		console.log(b)
-		state.a = 5
-		console.log(b)
+		autorun(update)
+		autorun(update2)
+		
 	</script>
 </html>

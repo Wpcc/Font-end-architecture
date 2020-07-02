@@ -15,6 +15,10 @@
 		function update(){
 			b = a * 10
 		}
+		let c
+		function update2(){
+			c = a * 20
+		}
 		
 		// 响应式
 		function isObject(obj){
@@ -35,6 +39,7 @@
 					this.key = val
 					// 执行update函数
 					update()
+					update2()
 				}
 			})
 		}

@@ -27,6 +27,7 @@
 			if(!isObject(obj)){
 				throw new TypeError()
 			}
+			let sub = []
 			Object.defineProperty(obj,key,{
 				get(){
 					return this.key
@@ -34,7 +35,6 @@
 				set(val){
 					this.key = val
 					// 执行update函数
-					update()
 				}
 			})
 		}
