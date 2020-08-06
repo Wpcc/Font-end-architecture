@@ -93,6 +93,28 @@ git commit -m"第二次提交文件"
 git push
 ```
 
+### 分支
+
+- 拉取分支
+
+```shell
+git fetch
+```
+
+- 查看分支
+
+```shell
+git branch -a
+```
+
+- 切换分支（dev为分支名）
+
+```shell
+git checkout dev
+```
+
+
+
 ### .gitignore文件
 
 该文件用来控制项目中的上传文件。如 node_modules
