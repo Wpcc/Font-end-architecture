@@ -8,17 +8,25 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <div id="app">
-    <h1>{{ msg }}</h1>
-    <input type="text" v-model='msg'>
-  </div>
-<script>
-  var vm = new Vue({
-    el:'#app',
-    data:{
-      msg:'hello'
-    }
-  })
-</script>
+<div id="app">
+  <div @callback='change'>{{ msg }}</div>
+</div>
 </body>
+<script type="text/javascript">
+// this.$emit 其实是触发一个自定义事件
+var vm = new Vue({
+  el:'#app',
+  data:{
+    msg:'hello'
+  },
+  methods:{
+    change(){
+      this.msg = 'world'
+    }
+  },
+  mounted(){
+    this.$emit('callback','hello')
+  }
+})
+</script>
 </html>

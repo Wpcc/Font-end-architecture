@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click='show()'>获取子组件的值</button>
+    <tem ref='child'></tem>
+  </div>
+  <template id="myTem">
+    <div>
+			<h1>{{ msg }}</h1>
+			<button @click='change'>change</button>
+		</div>
+  </template>
+</body>
+<script>
+// 类似于js中的DOM操作
+var vm = new Vue({
+  el:'#app',
+  components:{
+    tem:{
+      data:function(){
+        return {
+          msg:'i am son'
+        }
+      },
+			methods:{
+				change(){
+					this.msg = '2222'
+				}
+			},
+      template:'#myTem',
+    }
+  },
+	data:{
+		say:''
+	},
+  methods:{
+    show(){
+      console.log(this.$refs.child.msg);
+    }
+  },
+	watch:{
+		say:function(newData){
+			console.log('watch:' + newData)
+		}
+	},
+	mounted(){
+		this.say = this.$refs.child.msg
+	}
+})
+</script>
+</html>

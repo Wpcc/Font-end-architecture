@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-com :msg="msg"></my-com>
+  </div>
+  <template id="myTem">
+    <h1>{{ msg }}</h1>
+  </template>
+</body>
+<script>
+	/* 
+	 props：
+	 （1）数组：直接赋值
+	 （2）对象：确定传参类型，是否为必需字段，默认值……
+	 （3）赋值给组件中的数据；对数据的修改并不会导致props里面值的变化。故不影响父元素数据
+	 */
+  var vm = new Vue({
+    el:'#app',
+    data:{
+      msg:'hello'
+    },
+    components:{
+      myCom:{
+        props:{
+          msg:{
+            type:String,
+            required:true,
+            default:'default'
+          }
+        },
+        template:'#myTem',
+      }
+    }
+  })
+  console.log(vm.$children[0].$props.msg)
+</script>
+</html>

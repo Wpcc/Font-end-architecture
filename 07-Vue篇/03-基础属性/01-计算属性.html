@@ -8,17 +8,24 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <div id="app">
-    <h1>{{ msg }}</h1>
-    <input type="text" v-model='msg'>
-  </div>
+<div id="app">
+  <input type="text" placeholder="请输入姓" v-model="firstName">
+  <input type="text" placeholder="请输入名" v-model="lastName">
+  <h3>{{ fullName }}</h3>
+</div>
+</body>
 <script>
   var vm = new Vue({
     el:'#app',
     data:{
-      msg:'hello'
+      firstName:'',
+      lastName:''
+    },
+    computed:{
+      fullName(){
+        return this.firstName + this.lastName;
+      }
     }
   })
 </script>
-</body>
 </html>

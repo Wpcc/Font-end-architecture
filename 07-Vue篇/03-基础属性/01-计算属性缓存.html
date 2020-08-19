@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <div>计算属性：{{now}}</div>
+	<div>计算属性：{{now}}</div>
+	<div>方法：{{now2()}}</div>
+	<div>方法：{{now2()}}</div>
+</div>
+</body>
+<script>
+  var vm = new Vue({
+    el:'#app',
+    data:{
+      firstName:'',
+      lastName:''
+    },
+		computed: {
+			now: function () {
+			  return Date.now()
+			}
+		},
+		methods: {
+			now2:function(){
+				return Date.now()
+			}
+		},
+		mounted(){
+			console.log('计算属性：' + this.now)
+			setTimeout(() => {
+				console.log('计算属性：' + this.now)
+			},1000)
+			console.log('方法' + this.now2())
+			setTimeout(() => {
+				console.log('方法：' + this.now2())
+			},1000)
+		}
+  })
+</script>
+</html>

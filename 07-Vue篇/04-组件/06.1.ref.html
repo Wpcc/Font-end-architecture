@@ -9,16 +9,19 @@
 </head>
 <body>
   <div id="app">
-    <h1>{{ msg }}</h1>
-    <input type="text" v-model='msg'>
+    <button @click='show()'>获取子组件的值</button>
+    <form ref="child"></form>
   </div>
-<script>
-  var vm = new Vue({
-    el:'#app',
-    data:{
-      msg:'hello'
-    }
-  })
-</script>
 </body>
+<script>
+// 类似于js中的DOM操作
+var vm = new Vue({
+  el:'#app',
+  methods:{
+    show(){
+      console.log(this.$refs.child);
+    }
+  }
+})
+</script>
 </html>

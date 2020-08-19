@@ -8,17 +8,25 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <div id="app">
-    <h1>{{ msg }}</h1>
-    <input type="text" v-model='msg'>
-  </div>
-<script>
-  var vm = new Vue({
-    el:'#app',
-    data:{
-      msg:'hello'
-    }
-  })
-</script>
+<div id="app">
+  <my-com></my-com>
+</div>
+<template id="template">
+  <h1>{{msg}}</h1>
+</template>
 </body>
+<script>
+Vue.component('my-com',{
+	data(){
+		return {
+			msg:'hello world'
+		}
+	},
+  template:'#template'
+})
+var vm = new Vue({
+  el:'#app',
+})
+console.log(vm)
+</script>
 </html>
