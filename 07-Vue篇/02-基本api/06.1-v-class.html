@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+  .red{
+    color: red;
+  }
+	.blue{
+		color: blue;
+	}
+  </style>
+</head>
+<body>
+	<!-- 以对象的方式：后面数据如果不带引号，则类似于变量会在data中找 -->
+	<!-- 需要注意的是：使用对象参数时，不允许用三元表达式 -->
+	<!-- 如果带引号，则类似于字符串，会直接匹配class中的值 -->
+  <div id="app">
+    <h1 :class="{red:isActive}">{{ msg }}</h1>
+		<p :class="[isActive ? 'blue' : 'red']">world</p>
+  </div>
+<script>
+  var vm = new Vue({
+    el:'#app',
+    data:{
+      msg:'hello',
+      isActive:true
+    }
+  })
+</script>
+</body>
+</html>
