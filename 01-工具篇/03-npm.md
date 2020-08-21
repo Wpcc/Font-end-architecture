@@ -110,3 +110,21 @@ npm config list
 ```
 
 只要经过上面命令的配置，则以后所有的`npm install`都会默认通过淘宝的服务器来下载。
+
+### 删除
+
+有时候node_modules包特别大，目录层级太深，windows系统删除有时候还报没有管理员权限的错误。右键点击直接删除是删除不了的。
+
+这个时候可以安装一个插件`rimraf`，使用插件删除：
+
+```shell
+# 安装插件
+npm install rimraf -g
+# 删除命令
+rimraf node_modules
+# 删除文件
+del filename
+# 清除node_modules缓存
+npm cache clean
+```
+
