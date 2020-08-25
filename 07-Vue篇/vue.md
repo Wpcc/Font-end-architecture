@@ -296,6 +296,34 @@ Vue.directive（'focus',{
 </script>
 ```
 
+### vue中的数据
+
+如果vue中的数据是一个对象或者是一个数组，并且未定义，当我们获取后台接口，然后去更改对象或数组，DOM节点上的数据并无法自适应。
+
+[官方文档说明](https://cn.vuejs.org/v2/guide/reactivity.html)
+
+```html
+// html 页面
+<div id="app">
+    {{ msg[0] ? 'lisi' : msg[0].name }}
+</div>
+<script>
+    var vm = new Vue({   //配置对象
+        el:'#app',
+        data:{
+            msg:[]
+        },
+        created(){
+            setTimeout(() => {
+                this.msg[0] = {name:'zhangsan'}
+                // 此处应该使用$set进行设置，才会使用响应式
+                // this.$set(this.mag,0,{name:'zhangsan'})
+            })
+        }
+    })
+</script>
+```
+
 
 
 ### vue中的指令

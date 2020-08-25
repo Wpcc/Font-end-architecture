@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="btn">click</div>
+</body>
+<script>
+    var oBtn = document.querySelector('.btn')
+    oBtn.onclick = function(){
+        console.log(111)
+        axios.get('http://127.0.0.1:3000/server.js')
+        .then(res => {
+            console.log(res)
+        })
+    }
+</script>
+</html>
