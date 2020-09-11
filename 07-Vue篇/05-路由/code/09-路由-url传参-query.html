@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="./lib/vue/vue.js"></script>
-  <script src="./lib/vue/vue-router.js"></script>
+  <script src="./lib/vue.js"></script>
+  <script src="./lib/vue-router.js"></script>
 </head>
 <body>
   <div id="app">
@@ -16,7 +16,11 @@
     <router-view></router-view>
   </div>
   <template id="myTemp">
-    <div>{{ msg }}</div>
+		<div>
+			<button @click="change">change query</button>
+			<div>{{ msg }}</div>
+			<router-link to='/show/?id=1'>点击传递1</router-link>
+		</div>
   </template>
 </body>
 <script>
@@ -34,7 +38,14 @@
       $route(value){
         this.msg = value.query.id
       }
-    }
+    },
+		methods:{
+			change(){
+				this.$set(this.$route.query,'id',2)
+				console.log('change')
+				console.log(this.$route.query.id)
+			}
+		}
   }
   var router = new VueRouter({
     routes: [

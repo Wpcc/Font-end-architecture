@@ -11,6 +11,8 @@
 	<div id="app">{{msg[0] ? msg[0].name : 'default'}}</div>
 </body>
 <script>
+	// 使用this.$set更新数据：在Vue中，如果数据是数组或者对象，里面的值并未声明，vue并不会进行数据双向绑定
+	// 故需要使用，this.$set进行设置或使用this.$forceUpdate()进行刷新（Vue实例）
 	new Vue({
 		el:"#app",
 		data:{
