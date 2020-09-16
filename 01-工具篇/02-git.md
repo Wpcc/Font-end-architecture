@@ -54,6 +54,11 @@ git commit -a -m "修改了一个bug" # 将文件直接提交并留言
 git push # 将文件提交到远程主机，第一次需要配置远程主机名
 
 git remote rm origin # 删除远程仓库
+
+### 分支代码
+git fetch # 拉取其余分支到仓库
+git branch -A # 查看仓库所有分支
+git checkout <分支名> # 切换分支
 ```
 
 ### 案例
