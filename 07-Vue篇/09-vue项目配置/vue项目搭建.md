@@ -12,6 +12,47 @@
 
 输入命令语句：`vue create <项目名>`，具体选择项查看[这里](https://github.com/Wpcc/studyVue02)
 
+### ESLint配置
+
+**VSCode设置：**
+
+文件-首选项-设置：
+
+```json
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint":true
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "html",
+        "vue"
+    ],
+    "editor.tokenColorCustomizations": null
+}
+```
+
+**注释：**
+
+当我们想让单行代码跳过eslint检查规则时，通过以下注释：
+
+```javascript
+/* eslint-disable */
+console.log('hello world')
+/* eslint-disable */
+```
+
+
+
+**ESLint规则设置：**
+
+可以参考手摸手系列的eslint规则[地址](https://github.com/PanJiaChen/vue-element-admin/blob/master/.eslintrc.js)，更多选项可以点击这里查看对应[篇章](https://segmentfault.com/a/1190000009275424?utm_source=tag-newest)。
+
+**当进行以上设置后，我们用VSCode保存代码是，就可以根据根目录下的.eslintrc.js配置的eslint规则来检查和做一些简单的fix。**
+
+
+
 ### webpack配置
 
 在根目录下创建`vue.config.js`文件，该文件本质上是 Vue CLI3.0 对 webpack 的封装。

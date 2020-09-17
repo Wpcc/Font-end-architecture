@@ -59,6 +59,10 @@ git remote rm origin # 删除远程仓库
 git fetch # 拉取其余分支到仓库
 git branch -A # 查看仓库所有分支
 git checkout <分支名> # 切换分支
+
+### merge 解释
+git merge # 合并远程分支
+git merge <分支名> # 将本地分支合并到当前所在分支
 ```
 
 ### 案例
@@ -100,22 +104,84 @@ git push
 
 ### 分支
 
-- 拉取分支
+如果我们想在本地创建一个分支，使用如下命令：
+
+- 创建分支
 
 ```shell
-git fetch
+git branch <分支名>
 ```
+
+当我们在分支上做了一定修改时，在提交到远程时，需要添加远程映射分支：
+
+- 添加远程分支
+
+```shell
+# git add -A
+# git commit -m"创建新分支"
+git push --set-upstream origin <本地分支名>
+```
+
+查看本地分支：
+
 
 - 查看分支
 
 ```shell
 git branch -a
 ```
+如果本地没有其他分支，很大情况下，意味着我们并没有将其他分支拉取到本地仓库，需要使用如下命令：
+
+- 拉取分支
+
+```shell
+git fetch
+```
 
 - 切换分支（dev为分支名）
 
 ```shell
 git checkout dev
+```
+
+#### 冲突
+
+当远程仓库改变，而本地仓库并没有发生更改，比如我们在多人开发应用的时候。这个时候我们需要把远程代码拉取到本地仓库，处理冲突，之后才能进行提交：
+
+- 将工作区域提交到本地仓库
+
+```shell
+git add -A
+git commit -m"test"
+```
+
+- 拉取远程代码
+
+```shell
+git pull
+```
+
+一般这个时候，编译器（如VSCode）会自动高亮显示冲突代码，我们可以手动进行更改冲突，更改完后进行提交。
+
+#### 合并
+
+比如我们在一个分支上开发留言板，开发了一半，业务突然下发，说需要修复一下master主分支上的一个bug，我们当然不能直接在master上面进行操作，这个时候就可以新建一个分支。
+
+- 新建分支
+
+```shell
+git branch <分支名>
+```
+
+在该分支开发完毕后，将该分支合并到master分支：
+
+- 合并分支
+
+```shell
+# 切换到主分支
+# git checkout master
+# 合并分支
+git merge <分支名>
 ```
 
 
