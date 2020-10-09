@@ -18,7 +18,9 @@
 		
 	</body>
 	<script type="text/javascript">
-		// 最简单的节流
+		// 最简单的节流：
+		// 节流使用的是闭包
+		// 在规定的时间内，只在最开始的时间里触发
 		function throttle(fn,interval){
 			var last
 			return function(){

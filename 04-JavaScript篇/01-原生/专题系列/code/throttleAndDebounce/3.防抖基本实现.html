@@ -8,6 +8,9 @@
 	</body>
 	<script>
 		// 最简单的防抖
+		// 防抖使用的是定时器
+		// 每一次事件都会开启新的定时器，那么防抖会在最终规定的时间触发
+		// 如果一直触发事件，那么定时器会一直向后推迟
 		function debounce(fn,interval){
 			var timer
 			return function(){
