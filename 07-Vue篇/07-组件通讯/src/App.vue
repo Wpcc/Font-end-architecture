@@ -1,32 +1,29 @@
 <template>
-	<div id="app">
-		<show :initMsg="msg"></show>
-		<click @callback="getData"></click>
-	</div>
+  <div>
+    <Show :initMsg="msg"></Show>
+    <Click @callback="getData"></Click>
+  </div>
 </template>
 
 <script>
-	import click from './components/click.vue'
-	import show from './components/show.vue'
-
-	export default {
-		name: 'App',
-		components: {
-			click,
-			show
-		},
-		data() {
-			return {
-				msg: 'hello'
-			}
-		},
-		methods: {
-			getData(msg) {
-				this.msg = msg
-				console.log(this.msg)
-			}
-		}
-	}
+import Show from "./components/show.vue";
+import Click from "./components/click.vue";
+export default {
+  data() {
+    return {
+      msg: "",
+    };
+  },
+  components: {
+    Show,
+    Click,
+  },
+  methods: {
+    getData(data) {
+      this.msg = data;
+    },
+  },
+};
 </script>
 
 <style>

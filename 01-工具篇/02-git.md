@@ -57,7 +57,7 @@ git remote rm origin # 删除远程仓库
 
 ### 分支代码
 git fetch # 拉取其余分支到仓库
-git branch -A # 查看仓库所有分支
+git branch -a # 查看仓库所有分支
 git checkout <分支名> # 切换分支
 
 ### merge 解释

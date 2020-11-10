@@ -14,7 +14,7 @@
 
 ### ESLint配置
 
-**VSCode设置：**
+#### VSCode设置
 
 文件-首选项-设置：
 
@@ -45,11 +45,11 @@ console.log('hello world')
 
 
 
-**ESLint规则设置：**
+#### 项目设置
 
 可以参考手摸手系列的eslint规则[地址](https://github.com/PanJiaChen/vue-element-admin/blob/master/.eslintrc.js)，更多选项可以点击这里查看对应[篇章](https://segmentfault.com/a/1190000009275424?utm_source=tag-newest)。
 
-**当进行以上设置后，我们用VSCode保存代码是，就可以根据根目录下的.eslintrc.js配置的eslint规则来检查和做一些简单的fix。**
+**当进行以上设置后，我们用VSCode保存代码时，就可以根据根目录下的.eslintrc.js配置的eslint规则来检查和做一些简单的fix。**
 
 
 
@@ -115,6 +115,63 @@ module.exports = {
 
 
 
+### 多环境配置
+
+在开发一个项目时，往往存在多个环境，比如开发环境（development），比如生产环境（production），等。在不同的环境，或许需要请求不同的接口或用到不同参数，vue便提供了这种模式。
+
+具体可观看[官网](模式)
+
+**配置文件名：**
+
+```shell
+.env                  # 在所有的环境中被载入
+.env.local            # 在所有的环境中被载入，但会被git忽略
+.env.[mode]           # 只在指定的模式中被载入
+.env.[mode].local     # 只在指定的模式中被载入，但会被git忽略
+```
+
+**配置文件内容：**
+
+- .env 文件
+
+```.env
+# just a flag
+ENV = 'env'
+
+# base api
+VUE_APP_TITLE = 'env title'
+```
+
+- .env.staging 文件
+
+```.env.staging
+# just a flag
+ENV = 'env'
+
+# base api
+VUE_APP_TITLE = 'staging title'
+```
+
+**package.json启动项：**
+
+```json
+"scripts":{
+    "serve":"vue-cli-service serve",
+    "serve:staging":"vue-cli-service serve --mode staging"
+}
+```
+
+**访问方式：**
+
+```javascript
+// 在vue组件的访问
+created(){
+    console.log(process.env.VUE_APP_TITLE)
+}
+```
+
+
+
 ### 压缩可视化
 
 **BundleAnalyzerPlugin**
@@ -132,3 +189,22 @@ module.exports = {
 ```
 
 详细配置：https://segmentfault.com/a/1190000017716736
+
+### 样式
+
+#### 公用样式抽取
+
+对于vue中关于css的一些公用样式，比如几个页面共用的某个样式，可以做如下处理：
+
+- 在`src/assets/styles`创建`public.scss`文件（具体根据vue使用哪种css），将公用css样式写入该文件
+- 在需要用到的vue文件样式中引入`@import '@/assets/styles/public.scss'`
+
+#### 背景图
+
+```css
+background:url('~@/assets/images/left.png') no-repeat;
+backgrond-size:100%;
+```
+
+- `@`符号一般为vue.config.js中配置的关于webpack的路径
+- `~`符号，推测为固定定位的一种写法

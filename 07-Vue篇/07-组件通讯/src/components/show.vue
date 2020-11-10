@@ -1,13 +1,11 @@
 <template>
-	<div>
-		<p>留言：{{initMsg}}</p>
-	</div>
+  <div>留言：{{ this.initMsg }}</div>
 </template>
 
 <script>
-	export default {
-		props:['initMsg']
-	}
+export default {
+  props: ["initMsg"],
+};
 </script>
 
 <style>
