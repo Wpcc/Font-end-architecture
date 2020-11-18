@@ -208,3 +208,6 @@ git merge <分支名>
     由于远程仓库原本已经有了本地连接，此刻需要将连接覆盖掉。
 
      `git push origin master -f`
+
+- 不使用ssh的方式，但每次提交代码都不需要输入用户名和密码
+  - https://jingyan.baidu.com/article/4b07be3cf27d8148b280f36a.html
