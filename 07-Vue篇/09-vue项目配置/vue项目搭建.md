@@ -6,11 +6,18 @@
 
 - 代码规范
   - ESLint + VSCode
-- 
 
 ### 项目创建
 
 输入命令语句：`vue create <项目名>`，具体选择项查看[这里](https://github.com/Wpcc/studyVue02)
+
+#### 必要依赖
+
+- sass、sass-loader 
+  - 用于翻译`<style lang="sass" scoped></style>`的样式文件
+  - 安装方式`npm i sass sass-loader -D `
+
+
 
 ### ESLint配置
 
@@ -68,7 +75,7 @@ function resolve(dir){ // 加上完整路径
     return path.join(__dirname,dir)
 }
 // 根据不同的全局变量，修改不同的端口号
-const port = process.env.port || process.env.npm_config_port || 9528 
+const port = process.env.VUE_APP_PORT || 9528 
 module.exports = {
   publicPath: './',
   outputDir: 'dist',
@@ -96,6 +103,7 @@ module.exports = {
     port: port,
     // nginx代理配置
     proxy: {
+      // 这里需修改
       '/o2cPesm/': {
         target: process.env.VUE_APP_URL, // 需在全局变量中定义
         changeOrigin: true,
@@ -192,6 +200,20 @@ module.exports = {
 
 ### 样式
 
+#### 重置样式
+
+使用normalize进行样式重置，具体方法如下：
+
+- 安装[normalize](https://github.com/necolas/normalize.css/)
+
+- 在vue项目中的main.js文件中引入normalize
+
+  ```javascript
+  import 'normalize.css/normalize.css'
+  ```
+
+  
+
 #### 公用样式抽取
 
 对于vue中关于css的一些公用样式，比如几个页面共用的某个样式，可以做如下处理：
@@ -208,3 +230,15 @@ backgrond-size:100%;
 
 - `@`符号一般为vue.config.js中配置的关于webpack的路径
 - `~`符号，推测为固定定位的一种写法
+
+#### 替换图标
+
+替换public文件夹中的favicon.ico即可
+
+### 请求
+
+大多数请求都会安装axios。
+
+```shell
+npm i axios
+```
