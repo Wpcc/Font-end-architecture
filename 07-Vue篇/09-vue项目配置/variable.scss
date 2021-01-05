@@ -1,0 +1,642 @@
+html {
+    font-size: 13.33333vw
+}
+
+@media screen and (max-width: 320px) {
+    html {
+        font-size: 42.667PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width:360px) {
+    html {
+        font-size: 48PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width:375px) {
+    html {
+        font-size: 50PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 376px) and (max-width:393px) {
+    html {
+        font-size: 52.4PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 394px) and (max-width:412px) {
+    html {
+        font-size: 54.93PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 413px) and (max-width:414px) {
+    html {
+        font-size: 55.2PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 415px) and (max-width:480px) {
+    html {
+        font-size: 64PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width:540px) {
+    html {
+        font-size: 72PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 541px) and (max-width:640px) {
+    html {
+        font-size: 85.33PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 641px) and (max-width:720px) {
+    html {
+        font-size: 96PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 721px) and (max-width:768px) {
+    html {
+        font-size: 102.4PX;
+        font-size: 13.33333vw
+    }
+}
+
+@media screen and (min-width: 769px) {
+    html {
+        font-size: 102.4PX;
+
+        #app {
+            width: 768PX;
+            margin: 0 auto
+        }
+    }
+}
+
+
+/*------------------------------------页面初始化------------------------------------*/
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+abbr,
+address,
+big,
+em,
+img,
+q,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+form,
+fieldset,
+label,
+caption,
+tbody,
+thead,
+tfoot,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figure,
+figcaption,
+header,
+footer,
+menu,
+nav,
+output,
+section,
+time,
+mark,
+audio,
+video,
+input,
+select,
+button {
+    margin: 0;
+    padding: 0;
+    font-family: PingFang-SC-Regular;
+}
+
+.plane {
+    position: fixed;
+    bottom: .5rem;
+    right: .5rem;
+    height: 0.8rem;
+    width: .8rem;
+    font-size: .8rem;
+    border-radius: 50%;
+    z-index: 9999999999;
+    background-color: #fff;
+}
+
+body {
+    height: 100%;
+    background: #F3F5F8;
+    font-size: 0;
+}
+
+html {
+    font-size: 13.3333vw;
+    /* //(100px/750px)*100vw */
+    height: 100%;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+
+/*去除默认样式*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+i,
+em,
+address,
+caption,
+cite,
+code,
+dfn,
+th,
+var {
+    font-weight: normal;
+    font-style: normal;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    line-height: 0;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+}
+
+.tac {
+    text-align: center;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.poa {
+    position: absolute;
+}
+
+.por {
+    position: relative;
+}
+
+
+/* 水平垂直居中的公共类 */
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* 水平居中公共类 */
+
+.center-x {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/* 垂直居中公共类 */
+
+.center-y {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+/*盒子模型的兼容性*/
+
+.boxSize {
+    -moz-box-sizing: border-box;
+    /* Firefox */
+    -webkit-box-sizing: border-box;
+    /* Safari */
+    box-sizing: border-box;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.w45 {
+    width: 48%;
+    /* border: 1px solid red; */
+}
+
+.w100 {
+    width: 100%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.w55 {
+    width: 55%;
+    margin-top: 0.2rem;
+}
+
+.w40 {
+    width: 40%;
+}
+
+.w30 {
+    width: 30%;
+}
+
+.w48 {
+    width: 45%;
+    margin-top: 0.2rem;
+}
+
+.w20 {
+    width: 20%;
+}
+
+.w15 {
+    width: 15%;
+}
+
+.w14 {
+    width: 14%;
+}
+
+.w60 {
+    width: 60%;
+}
+
+.mt {
+    margin-top: 10px;
+}
+
+
+/*让文字以...显示*/
+
+.nowarp {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.morewarp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /*这里是两行以后用点点点显示*/
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+
+/*------------------------------------公共的样式------------------------------------*/
+
+
+/*设置高度百分百，overflow*/
+
+.attrHeight {
+    height: 100%;
+    overflow-y: auto;
+}
+
+
+/*设置边框圆角*/
+
+.borderRadius {
+    -moz-border-radius: 5px;
+    /*no*/
+    /* Firefox */
+    -webkit-border-radius: 5px;
+    /*no*/
+    /* Safari 和 Chrome */
+    border-radius: 5px;
+    /*no*/
+    /* Opera 10.5+, 以及使用了IE-CSS3的IE浏览器 */
+}
+
+
+/*设置下边框线*/
+
+.bottomLine {
+    border-bottom: .01rem solid #ddd
+}
+
+
+/*设置背景颜色*/
+
+.bgcCom {
+    background: rgba(255, 255, 255, 1);
+}
+
+.text_left {
+    text-align: left;
+}
+
+
+/*按钮的公共样式*/
+
+
+/*两个按钮*/
+
+.attentionDetail_btn {
+    padding: .2rem;
+}
+
+.attentionDetail_btn .van-button {
+    /*display: block;*/
+    width: 3.3rem;
+    height: .8rem;
+    line-height: .8rem;
+    text-align: center;
+    border-radius: .1rem;
+    background: #db301c;
+    color: #fff;
+    font-size: .3rem;
+    font-weight: bold;
+}
+
+
+/*单个按钮*/
+
+.public_btn {
+    display: block;
+    width: 6.9rem;
+    margin: .3rem auto;
+    height: .8rem;
+    line-height: .8rem;
+    text-align: center;
+    border-radius: .8rem;
+    font-size: .3rem;
+    color: #fff;
+    background: #4f77aa;
+    outline: none;
+    border: 0;
+}
+
+.public_btn1 {
+    display: block;
+    width: 2.3rem;
+    /* margin: .3rem auto; */
+    height: .8rem;
+    line-height: .8rem;
+    text-align: center;
+    border-radius: .8rem;
+    font-weight: bold;
+    font-size: .35rem;
+    color: #fff;
+    background: #4f77aa;
+    outline: none;
+    border: 0;
+}
+
+.public_btn2 {
+    display: block;
+    width: 2.3rem;
+    /* margin: .3rem auto; */
+    height: .8rem;
+    line-height: .8rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: .8rem;
+    font-size: .35rem;
+    color: #4f77aa;
+    background: #fff;
+    outline: none;
+    border: 1px solid #4F77AA;
+}
+
+.smallDots {
+    width: 5px;
+    height: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: #0093dd;
+}
+
+
+/*------------------------------------设置vant的样式------------------------------------*/
+
+
+/*折叠面板的样式*/
+
+.van-cell--clickable:active {
+    background-color: #fff;
+}
+
+.van-collapse-item__content {
+    background-color: #f4f4f4;
+}
+
+
+/*折叠面板Icon的样式*/
+
+.drop_content .van-icon-arrow:before {
+    font-family: "iconfont";
+    content: "\e648";
+}
+
+.drop_content .van-cell__right-icon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    /* IE 9 */
+    -webkit-transform: rotate(90deg);
+    /* Safari and Chrome */
+}
+
+.drop_content .van-cell {
+    padding: 0;
+    height: .65rem;
+}
+
+.attention_delete ._v-container>._v-content {
+    /*height: 100%;*/
+    overflow-y: auto;
+}
+
+button {
+    border: 0;
+}
+
+
+/* vant button 禁用样式 */
+
+.van-button--disabled {
+    background: #999;
+}
+
+.van-button--danger {
+    border: 0px solid white;
+}
+
+
+/* v3Navbar样式 */
+
+.van-nav-bar {
+    background: #4F77AA !important;
+    height: 0.8rem;
+}
+
+.van-nav-bar__text {
+    color: #fff;
+}
+
+.van-icon-arrow-left:before {
+    color: white;
+}
+
+.van-nav-bar__title {
+    color: white;
+    height: 0.8rem;
+    line-height: 0.8rem;
+}
+
+
+/* dialog header样式 */
+
+.van-dialog__header {
+    font-size: 0.4rem;
+}
+
+.van-dialog__message {
+    padding: 0;
+    padding-top: 0.2rem;
+}
+
+
+/* v3 编辑 复制样式 */
+
+.edit {
+    top: 0.2rem;
+    position: absolute;
+    right: 25%;
+    width: 0.45rem;
+    height: 0.45rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.copy {
+    top: 0.2rem;
+    position: absolute;
+    right: 10%;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.custom-title {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.32rem;
+    line-height: 0.32rem;
+    font-weight: bold;
+    color: rgba(17, 17, 17, 1);
+    position: relative;
+
+    &:before {
+        content: "";
+        width: 0.31rem;
+        height: 0.31rem;
+        background: rgba(204, 222, 248, 1);
+        border-radius: 50%;
+        position: absolute;
+        bottom: -0.08rem;
+        right: -0.15rem;
+        z-index: -1;
+    }
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/*滚动槽*/
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
+}

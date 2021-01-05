@@ -178,6 +178,55 @@ created(){
 }
 ```
 
+#### 代理
+
+为了简化，以及方便修改域名。在vue项目中通常使用代理，配置文件为`vue.config.js`，以下面配置为例：
+
+```javascript
+// 根据不同的全局变量，修改不同的端口号
+const port = process.env.VUE_APP_PORT
+const proxy_target = process.env.VUE_APP_PROXY_TARGET
+const proxy_carInfo = process.env.VUE_APP_PROXY_CARINFO
+
+// 配置 webpack-dev-server 行为。
+  devServer: {
+    open: true, // 本地服务器构建完成后，是否打开默认浏览器
+    host: '0.0.0.0',
+    port: port,
+    // nginx代理配置
+    proxy: {
+      '^/map': {
+        target: proxy_target, // 对应自己的接口
+        changeOrigin: true,
+        pathRewrite: {
+          '^/map': '/map'
+        }
+      },
+      '^/pfsm': {
+        target: proxy_carInfo, // 对应自己的接口
+        changeOrigin: true
+      }
+    }
+  }
+```
+
+当`webpack`打包工具在碰到以`/map`和`/pfsm`开头的时候，会去寻找定义在不同环境中的环境变量。
+
+**但是在生产环境中，并不会使用代理**，这个时候需要我们配置axios，当在生产环境的时候，使用适当的域名，具体配置如下：
+
+```javascript
+import axios from 'axios'
+import { Message } from 'element-ui'
+
+const request2 = axios.create({
+  baseURL: process.env.NODE_ENV === 'dev' ? '/' : process.env.VUE_APP_PROXY_CARINFO,
+  withCredentials: true,
+  timeout: 60000
+})
+```
+
+查看配置文件中的`request.js`文件，可以了解到详细配置。
+
 
 
 ### 压缩可视化
@@ -220,6 +269,10 @@ module.exports = {
 
 - 在`src/assets/styles`创建`public.scss`文件（具体根据vue使用哪种css），将公用css样式写入该文件
 - 在需要用到的vue文件样式中引入`@import '@/assets/styles/public.scss'`
+
+### 自适应样式
+
+参考当前文件夹下的 variable.scss 文件
 
 #### 背景图
 

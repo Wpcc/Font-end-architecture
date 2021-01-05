@@ -20,6 +20,7 @@ export default {
   },
   methods: {
     getData(data) {
+      debugger
       this.msg = data;
     },
   },
