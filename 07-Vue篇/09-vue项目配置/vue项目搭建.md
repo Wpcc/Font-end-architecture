@@ -270,9 +270,16 @@ module.exports = {
 - 在`src/assets/styles`创建`public.scss`文件（具体根据vue使用哪种css），将公用css样式写入该文件
 - 在需要用到的vue文件样式中引入`@import '@/assets/styles/public.scss'`
 
-### 自适应样式
+#### 自适应样式
 
 参考当前文件夹下的 variable.scss 文件
+
+具体可查看 vant UI 对自适应的处理
+
+关于移动端13.3333vw数值的说明：
+
+- 移动端的设计稿一般是width：750px，height：auto（这里指的是不确定），100vw = 100%，这个也没有问题吧；那么，设计稿拿过来，我们可以得出：750px = 100vw，这个也没有问题吧，那么1px等于多少vw呢？ 是不是 1px = 100 / 750 vw = 0.13333vw；那么100px = 多少vw呢，这个应该知道了吧。100px = 13.33vw；
+- 即13.33vw等于100px
 
 #### 背景图
 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 300px;
+      background-color: #ccc;
+      line-height: 50px;
+      padding: 5px;
+    }
+
+  </style>
+</head>
+<body>
+  <div>
+    <p>今天天气不错</p>
+    <p>今天天气不错，挺风和日丽的，我们下午没课</p>
+  </div>
+</body>
+<script>
+  let p1 = new Promise((res,rej) => {
+    setTimeout(() => {
+      res({
+        code:0,
+        p1:'p1'
+      }) 
+    },2000)
+  })
+  let p2 = new Promise((res,rej) => {
+    setTimeout(() => {
+      res({
+        code:0,
+        p2:'p2'
+      }) 
+    },1000)
+  })
+  let p3 = new Promise((res,rej) => {
+    setTimeout(() => {
+      res({
+        code:0,
+        p3:'p3'
+      }) 
+    },1000)
+  })
+
+  /*
+  
+  allSettled 中的接口顺序执行，也就是 p3 需要等待 p2 和 p1 执行完毕再进行调用
+  */
+  function loadList(){
+    
+    Promise.allSettled([p1,p2,p3])
+    .then(([res1,res2,res3]) => {
+      
+      if(res1.status === 'fulfilled' && res1.value.code === 0 ){
+        console.log(res1.value.p1)
+      }
+     
+      if(res2.status === 'fulfilled' && res2.value.code === 0 ){
+        console.log(res2.value.p2)
+      }
+
+      if(res3.status === 'fulfilled' && res3.value.code === 0 ){
+        console.log(res3.value.p3)
+      }
+      
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+  loadList()
+</script>
+</html>

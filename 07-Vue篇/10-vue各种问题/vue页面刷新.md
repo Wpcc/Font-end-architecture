@@ -50,7 +50,7 @@ this.$router.go(0)
                     this.isRouterAlive = true; //再打开
                 }) 
             }
-        }
+        }，
     }
 </script>
 ```

@@ -431,6 +431,14 @@ import some from './comment.js'
 
 ### Promise 
 
+- 方便书写
+
+- 使用 `.all` 或者 `.allSettled` 解决接口依赖问题：
+
+  - 具体请查看`promise.allSettled`文件
+
+  
+
 ### async 和 defer
 
 
