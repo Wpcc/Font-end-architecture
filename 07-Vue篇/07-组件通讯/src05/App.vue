@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       msg: "我是父元素的内容",
+      some:null
     };
   },
   components: {
@@ -23,7 +24,15 @@ export default {
       debugger
       this.msg = data;
     },
+    setSome(){
+      this.some = {}
+      this.some.a = 'aaa'
+      console.log(this.some)
+    }
   },
+  mounted(){
+    this.setSome()
+  }
 };
 </script>
 
