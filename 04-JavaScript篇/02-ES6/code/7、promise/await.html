@@ -24,59 +24,52 @@
   /*
   可以看出当p1是rej时,promise.allSettled封装的promise依旧会进入到then中
   */
-  let p1 = new Promise((res,rej) => {
+ function p1(){
+   return new Promise((res,rej) => {
     setTimeout(() => {
-      rej({
+      res({
         code:0,
         p1:'p1'
       }) 
-    },2000)
-  })
-  let p2 = new Promise((res,rej) => {
+    },1000)
+   })
+ }
+
+ function p2(){
+   return new Promise((res,rej) => {
     setTimeout(() => {
       res({
         code:0,
         p2:'p2'
       }) 
     },1000)
-  })
-  let p3 = new Promise((res,rej) => {
+   })
+ }
+
+function p3(){
+   return new Promise((res,rej) => {
     setTimeout(() => {
       res({
         code:0,
         p3:'p3'
       }) 
     },1000)
-  })
+   })
+ }
 
   /*
   
   allSettled 中的接口顺序执行，也就是 p3 需要等待 p2 和 p1 执行完毕再进行调用
   */
-  function loadList(){
-    
-    Promise.allSettled([p1,p2,p3])
-    .then(([res1,res2,res3]) => {
-      console.log(res2)
-      console.log(res1)
-      console.log(res3)
+  async function loadList(){
+  // 使用await前缀后，后面函数必须等前面函数执行完了再执行下一个
+   const res1 = await p1()
+   console.log(res1)
+   const res2 = await p2()
+   console.log(res2)
+   const res3 = await p3()
+   console.log(res3)
 
-      if(res1.status === 'fulfilled' && res1.value.code === 0 ){
-        console.log(res1.value.p1)
-      }
-     
-      if(res2.status === 'fulfilled' && res2.value.code === 0 ){
-        console.log(res2.value.p2)
-      }
-
-      if(res3.status === 'fulfilled' && res3.value.code === 0 ){
-        console.log(res3.value.p3)
-      }
-      
-    })
-    .catch(err => {
-      console.log(err)
-    })
   }
   loadList()
 </script>

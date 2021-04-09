@@ -9,57 +9,14 @@
 - 2015年6月正式发布的JavaScript语言标准，ES2015有称呼为ES6。
 - JavaScript语言的一个版本
 
-### 变量
+### 数据类型
 
-**let,const**
-
-- let 增加了块级作用域
-- 无法进行变量提升
-- 无法重复声明
+新增symbol数据类型，表示独一无二的值。
 
 ```javascript
-// javascript 没有块级作用域，只有全局作用域和函数作用域
-if(true){
-    var a = 2 
-    let b = 3
-}
-console.log(a) // 输出3
-console.log(b) // b is not defined
+let a = Symbol('a') // 字符串为描述的值，便于区分
+let b = Symbol('b') // 字符串为描述的值，便于区分
 ```
-
-```javascript
-// 无法变量提升
-console.log(a) // undefined
-console.log(b) // Cannot access 'b' before initialization
-var a = 2
-let b = 3
-```
-
-```javascript
-// 同一个作用域下无法重复声明
-let a = 2
-let a = 3
-// Identifier 'a' has already been declared
-```
-
-
-
-- const：在let的基础上，声明的变量内容无法修改
-
-```javascript
-// 定义的变量可以修改
-var a = 5
-a = 6
-console.log(a) // 6
-```
-
-```javascript
-// const定义的变量不可以修改
-const a = 5
-a = 6
-console.log(a) // Assignment to constant variable
-```
-
 
 ### 字符串
 
@@ -88,6 +45,61 @@ var a = `hello
 world!`
 console.log(a) // 带回车格式的 hello world！
 ```
+
+
+### 变量
+
+**let,const**
+
+- let 增加了块级作用域
+- 无法进行变量提升
+- 无法重复声明
+- 声明的变量并不在全局变量 window 上
+
+```javascript
+// javascript 没有块级作用域，只有全局作用域和函数作用域
+if(true){
+    var a = 2 
+    let b = 3
+}
+console.log(a) // 输出3
+console.log(b) // b is not defined
+```
+
+```javascript
+// 无法变量提升
+console.log(a) // undefined
+console.log(b) // Cannot access 'b' before initialization
+var a = 2
+let b = 3
+```
+
+```javascript
+// 同一个作用域下无法重复声明
+let a = 2
+let a = 3
+// Identifier 'a' has already been declared
+```
+
+
+
+- const：在let的基础上，声明的变量内容无法修改，更确切地说声明的变量地址无法修改，如果是对象，数组类型的话，可以更改里面的值。
+
+```javascript
+// 定义的变量可以修改
+var a = 5
+a = 6
+console.log(a) // 6
+```
+
+```javascript
+// const定义的变量不可以修改
+const a = 5
+a = 6
+console.log(a) // Assignment to constant variable
+```
+
+
 
 ### 函数
 
@@ -285,7 +297,7 @@ function Person(name){ // 02.构造函数 + 原型
 Person.prototype.say = function(){
     console.log(`hello i am ${this.name}`)
 }
-var person01 = newPerson('zhangsan')
+var person01 = new Person('zhangsan')
 
 function Animal(name){
     this.name = name
@@ -432,16 +444,36 @@ import some from './comment.js'
 ### Promise 
 
 - 方便书写
+-  `.all` 当所有异步接口成功才调用`then`
+- `.allSettled`当所有异步接口完成才调用`then`
+- `.all`和`.allSettled`具体请查看`promise.all`和`promise.allSettled`文件
 
-- 使用 `.all` 或者 `.allSettled` 解决接口依赖问题：
+- 细节说明
+  - 不管 all 还是 allSettled 封装，调用的对象都是Promise，比如：
 
-  - 具体请查看`promise.allSettled`文件
+```javascript
+let p1 = new Promise()
+Promise.all([p1])
 
-  
+let p2 = function (){
+    return new Promise()
+}
+Promise.all([p1()])
+```
 
-### async 和 defer
 
 
+
+
+#### async 和 await
+
+- async 和 await 一般用来搭配 Promise ，并且 await 必须使用在异步函数中。具体查看await.html，async 可以将同步函数更改为异步函数
+
+#### 接口依赖
+
+假设有a / b / c 三个接口，某个函数需要等该三个接口调用完毕再执行，这个时候可以使用allSettled进行封装。（如需要在地图上渲染一段路径，a拿到载重点，b拿到停车点，c拿到轨迹，map函数渲染整个数据点。）
+
+如果以上三个接口，b 接口依赖 a 接口数据，c 接口依赖 b 接口数据，那么此时用 await 进行封装。
 
 # 附加：
 
