@@ -26,7 +26,7 @@
   */
   let p1 = new Promise((res,rej) => {
     setTimeout(() => {
-      rej({
+      res({ 
         code:0,
         p1:'p1'
       }) 
@@ -34,7 +34,7 @@
   })
   let p2 = new Promise((res,rej) => {
     setTimeout(() => {
-      res({
+      rej({  // 这个地方使用reject
         code:0,
         p2:'p2'
       }) 
@@ -51,22 +51,24 @@
 
   /*
   
-  allSettled 中的接口顺序执行，也就是 p3 需要等待 p2 和 p1 执行完毕再进行调用
+  allSettled：
+    和all一样，不同的是返回结果完成就进入then，就算reject也进入
   */
   function loadList(){
     
     Promise.allSettled([p1,p2,p3])
     .then(([res1,res2,res3]) => {
-      console.log(res2)
       console.log(res1)
+      console.log(res2)
       console.log(res3)
 
       if(res1.status === 'fulfilled' && res1.value.code === 0 ){
         console.log(res1.value.p1)
       }
      
-      if(res2.status === 'fulfilled' && res2.value.code === 0 ){
-        console.log(res2.value.p2)
+      // 失败的处理和成功的处理不同
+      if(res2.status === 'rejected' && res2.reason.code === 0 ){
+        console.log(res2.reason.p2)
       }
 
       if(res3.status === 'fulfilled' && res3.value.code === 0 ){

@@ -461,17 +461,72 @@ let p2 = function (){
 Promise.all([p1()])
 ```
 
-
-
-
-
 #### async 和 await
 
 - async 和 await 一般用来搭配 Promise ，并且 await 必须使用在异步函数中。具体查看await.html，async 可以将同步函数更改为异步函数
 
+#### await处理错误方案
+
+```vue
+<!--
+作者：ssh-晨曦时梦见兮
+链接：https://zhuanlan.zhihu.com/p/133819602
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+-->
+
+<template>
+    <div v-if="error">failed to load</div>
+    <div v-else-if="loading">loading...</div>
+    <div v-else>hello {{fullName}}!</div>
+</template>
+
+<script>
+import { createComponent, computed } from 'vue'
+
+export default {
+  data() {
+    // 集中式的data定义 如果有其他逻辑相关的数据就很容易混乱
+    return {
+        data: {
+            firstName: '',
+            lastName: ''
+        },
+        loading: false,
+        error: false,
+    },
+  },
+  async created() {
+      try {
+        // 管理loading
+        this.loading = true
+        // 取数据
+        const data = await this.$axios('/api/user')
+        this.data = data
+      } catch (e) {
+        // 管理error
+        this.error = true
+      } finally {
+        // 管理loading
+        this.loading = false
+      }
+  },
+  computed() {
+      // 没人知道这个fullName和哪一部分的异步请求有关 和哪一部分的data有关 除非仔细阅读
+      // 在组件大了以后更是如此
+      fullName() {
+          return this.data.firstName + this.data.lastName
+      }
+  }
+}
+</script>
+```
+
+
+
 #### 接口依赖
 
-假设有a / b / c 三个接口，某个函数需要等该三个接口调用完毕再执行，这个时候可以使用allSettled进行封装。（如需要在地图上渲染一段路径，a拿到载重点，b拿到停车点，c拿到轨迹，map函数渲染整个数据点。）
+假设有a / b / c 三个接口，某个**函数**需要等该三个接口调用完毕再执行，这个时候可以使用allSettled或all进行封装。（如需要在地图上渲染一段路径，a拿到载重点，b拿到停车点，c拿到轨迹，map函数渲染整个数据点。）
 
 如果以上三个接口，b 接口依赖 a 接口数据，c 接口依赖 b 接口数据，那么此时用 await 进行封装。
 
