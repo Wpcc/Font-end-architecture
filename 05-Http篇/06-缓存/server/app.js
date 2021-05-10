@@ -17,6 +17,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+/*
+此处配置http请求头部信息
+  express框架中的static默认为协商缓存
+*/
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
