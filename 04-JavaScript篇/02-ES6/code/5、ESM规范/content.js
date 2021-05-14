@@ -1,7 +1,7 @@
 let content = 'hello'
-// let obj = {
-// 	name:'obj'
-// }
+let obj = {
+	name:'obj'
+}
 
 function change(){
 	content = 'world'
@@ -13,9 +13,9 @@ function change(){
 // 	obj.name = 'obj222'
 // },1000)
 
-export {content,change}
+// export {content,change}
 
-// export default obj
+export default obj
 // export default {
 // 	content,
 // 	change

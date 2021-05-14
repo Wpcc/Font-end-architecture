@@ -20,10 +20,11 @@ app.use(cookieParser());
 
 /*
 此处配置http请求头部信息
-  express框架中的static默认为协商缓存
+  express框架中的public默认为强缓存，views中的页面为协商缓存
 */
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public',express.static('public'));
+app.use('/dist',express.static('dist'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

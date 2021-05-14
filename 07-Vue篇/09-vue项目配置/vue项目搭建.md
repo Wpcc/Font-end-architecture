@@ -139,11 +139,43 @@ module.exports = {
 
 ### 多环境配置
 
+#### 默认配置
+
 在开发一个项目时，往往存在多个环境，比如开发环境（development），比如生产环境（production），等。在不同的环境，或许需要请求不同的接口或用到不同参数，vue便提供了这种模式。
 
-具体可观看[官网](模式)
+通过运行 package.json 中的 scripts 语句，项目便可以加载不同环境下的变量。
 
-**配置文件名：**
+默认情况下，vue 提供三种对应模式。
+
+- `development` 模式用于 `vue-cli-service serve`
+- `test` 模式用于 `vue-cli-service test:unit`
+- `production` 模式用于 `vue-cli-service build` 和 `vue-cli-service test:e2e`
+
+**package.json文件中的scripts语句：**
+
+```json
+"serve":"vue-cli-service serve",
+"test":"vue-cli-service test:unit",
+"production":"vue-cli-service build"
+```
+
+**Vue项目文件对应的环境文件：**
+
+- .env.development
+- .env.test
+- .env.production
+
+也就是说，当我们在命令行运行：
+
+- `npm run serve`的时候，项目默认加载`.env.development`文件
+
+- `npm run test`的时候，项目默认加载`.env.test`文件
+
+- `npm run production`的时候，项目默认加载`.env.production`文件
+
+  
+
+环境文件说明如下：
 
 ```shell
 .env                  # 在所有的环境中被载入
@@ -151,6 +183,53 @@ module.exports = {
 .env.[mode]           # 只在指定的模式中被载入
 .env.[mode].local     # 只在指定的模式中被载入，但会被git忽略
 ```
+
+#### 实际配置
+
+在实际项目中为了简便，往往都简写环境文件，如下：
+
+- .env  表示在所有环境中被载入
+- .env.dev 表示在开发环境中被载入
+- .env.test 表示在测试环境中被载入
+- .env.prod 表示在生产环境中被载入
+
+那么这个时候，我们则需要使用`--mode`去覆盖 package.json 中的默认参数：
+
+```json
+"serve": "vue-cli-service serve --mode dev",
+"serve:test":"vue-cli-service serve --mode test",
+"serve:prod":"vue-cli-service serve --mode prod",
+"build": "vue-cli-service build --mode prod",
+"lint": "vue-cli-service lint --mode prod"
+```
+
+#### node_env
+
+`NODE_ENV`取决于选择的环境模式，通过 package.json 设置，可以更改默认`NODE_ENV`的值。
+
+```json
+// 注意 = 与&符号之间不能有空行 否则会被设置到NODE_ENV当中
+"serve": "set NODE_ENV=dev&& vue-cli-service serve --mode dev",
+```
+
+#### 环境配置
+
+包括：本地、DEV、测试、生产
+
+```json
+"serve": "set NODE_ENV=dev&&vue-cli-service serve --mode dev",
+"serve:prod": "set NODE_ENV=prod&&vue-cli-service serve --mode prod",
+"serve:test": "set NODE_ENV=test&&vue-cli-service serve --mode test",
+"serve:local": "set NODE_ENV=local&&vue-cli-service serve --mode local",
+"build": "set NODE_ENV=dev& vue-cli-service build --mode dev",
+"build:dev": "set NODE_ENV=dev&& vue-cli-service build --mode dev",
+"build:test": "set NODE_ENV=production&& vue-cli-service build --mode test",
+"build:prod": "set NODE_ENV=production&& vue-cli-service build --mode prod"
+```
+
+**重点bug：华为云打包时`set NODE_ENV`不生效，只能在环境内设置。**
+
+
 
 **配置文件内容：**
 
@@ -316,3 +395,7 @@ backgrond-size:100%;
 ```shell
 npm i axios
 ```
+
+具体请查看[官网](http://www.axios-js.com/zh-cn/docs/)
+
+关于 axios 请求封装，请查看资源下的 request.js

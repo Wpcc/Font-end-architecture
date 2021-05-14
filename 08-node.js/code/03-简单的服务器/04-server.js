@@ -6,9 +6,9 @@ let phone = {
 	'03':'苹果'
 }
 
-http.createServer((res,req) => {
-	req.setHeader('Content-Type','text/plain;charset=utf-8')
-	req.end(JSON.stringify(phone))
+http.createServer((req,res) => {
+	res.setHeader('Content-Type','text/plain;charset=utf-8')
+	res.end(JSON.stringify(phone))
 	
 }).listen(3000)
 

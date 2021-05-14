@@ -11,13 +11,13 @@
 </body>
 <script type="module">
 	// export 导出的值可以更改，但export default 导出的值无法更改
-	import {content,change} from './content.js'
-	console.log(content)
-	change()
-	console.log(content)
-	setTimeout(function(){
-		console.log(content)
-	},2000)
+	// import {content,change} from './content.js'
+	// console.log(content)
+	// change()
+	// console.log(content)
+	// setTimeout(function(){
+	// 	console.log(content)
+	// },2000)
 	
 	
 	// import obj from './content.js'
@@ -32,11 +32,11 @@
 	//     console.log(obj.content)
 	// },2000)
 	
-	// import obj from './content.js'
-	// obj.name = 'main'
-	// console.log(obj.name)
-	// setTimeout(() => {
-	// 	console.log(obj.name)
-	// },1000)
+	import obj from './content.js'
+	obj.name = 'main'
+	console.log(obj.name)
+	setTimeout(() => {
+		console.log(obj.name)
+	},1000)
 </script>
 </html>

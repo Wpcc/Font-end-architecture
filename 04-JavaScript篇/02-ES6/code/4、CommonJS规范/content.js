@@ -19,3 +19,11 @@ module.exports = {
 	obj,
 	content_f
 }
+
+/**
+ * 或者：
+ * exports.content = content
+ * exports.change = change
+ * exports.obj = obj
+ * exports.content_f = content_f
+ */

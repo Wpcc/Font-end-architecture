@@ -362,19 +362,37 @@ animal1.say() //
   - **核心是导出`exports`对象**
   - `exports`是`module.exports`的简写，之所有在这里提出来，主要有两种导入方式
     - 第一种：导出exports对象
+    
+      - 适用于导出单个对象
+    
+      ```javascript
+      // comment.js 导出
+      let a = 'hello'
+      exports.a = a
+      
+      // main.js
+      let e = require('./comment.js')
+      console.log(e.a) // hello
+      ```
+    
+      
+    
     - 第二种：替换export对象，由于`exports`对象是`module.exports`的引用，顾需要用`module.exports`
-
-```javascript
-// comment.js 导出
-let a = 'hello'
-exports.a = a
-
-// main.js
-let e = require('./comment.js')
-console.log(e.a) // hello
-```
-
-
+    
+      - 适用于导出多个对象
+    
+      ```javascript
+      // comment.js 导出
+      let a = 'hello'
+      let b = 'world'
+      let c = 'jack'
+      
+      module.exports = {
+          a,b,c
+      }
+      ```
+    
+      
 
 - import（ES6）
   - 导出`export`
@@ -400,7 +418,7 @@ let a = 'zhangsan'
 function say(name){
     console.log(name)
 }
-export let person = {
+let person = {
     name:'zhangsan',
     say:function(){
         console.log(this.name)
