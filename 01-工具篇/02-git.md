@@ -153,7 +153,7 @@ git checkout dev
 - 将工作区域提交到本地仓库
 
 ```shell
-git add -A
+git add -a
 git commit -m"test"
 ```
 
@@ -212,4 +212,5 @@ git merge <分支名>
      `git push origin master -f`
 
 - 不使用ssh的方式，但每次提交代码都不需要输入用户名和密码
+  
   - https://jingyan.baidu.com/article/4b07be3cf27d8148b280f36a.html
