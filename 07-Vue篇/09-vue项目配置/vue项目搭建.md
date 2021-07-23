@@ -17,7 +17,6 @@
   - open in browser：编译器中打开项目文件
   - vue：Vue语法高亮
   - Vetur：Vue语法高亮
-- 
 
 
 

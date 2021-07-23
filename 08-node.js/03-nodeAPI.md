@@ -19,20 +19,28 @@
 - path.join
   - 把各个path片段连接在一起
 - path.resolve
-  - 把'/'当成根目录，解析路径并返回
+  - 给定的路径序列从右向左，每个后续path会被追加到前面
+  - 直到构建绝对路径
 
 ```javascript
 // 案例一
-path.join('/a','/b')
+path.join('/a','/b')  // /a + /b = /a/b
 // outputs '/a/b'
-path.resolve('/a','/b')
+path.resolve('/a','/b') // 由于/b是绝对路径 故直接返回/b
 // outputs '/b'
 
 // 案例二
 path.join('a','b1','..','b2')
 // outputs a/b2
-path.resolve('a','b1','..','b2')
-// outputs /home/myself/node/a/b2
+path.resolve('a','b1','../','b2')
+// 如果当前工作目录是/home/myself/node
+// 则返回 '/home/myself/node/a/b2'
+
+// 案例三
+path.join('/foo', 'bar', 'baz/asdf', 'quux', '..') // ..是上一级目录
+// output '/foo/bar/baz/asdf
+path.join('/foo', 'bar', 'baz/asdf', 'quux', '..')
+// output '/foo/bar/baz/asdf'
 ```
 
 ### url

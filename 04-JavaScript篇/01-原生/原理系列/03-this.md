@@ -2,18 +2,58 @@
 
 ### 概念
 
-**谁调用 this ，那么 this 指向谁。如果函数单独执行，那么 this 指向 window。**
+**谁调用 this ，那么 this 指向谁。如果没有调用，那么 this 指向当前执行环境的变量对象。**
 
-要弄清楚这句话，需要明白函数执行过程的两个概念，即函数声明，和函数调用。
+在这之前我们还要知道，每个函数的this实在调用时绑定的，而不是在定义时绑定，这点和函数执行环境上的作用域不同。
+
+下面来看几个例子：
 
 ```javascript
-function foo(){ // 函数声明：内部代码不执行
-    console.log('foo')
+function foo(){
+    console.log(this.a)
 }
-foo() // 函数调用：执行内部代码
+var a = 2
+foo() // 2
+// foo函数在全局环境下调用，故指向window
 ```
 
-this 的指向，取决于函数调用，和函数声明无关。
+```javascript
+function foo(){
+    console.log(this.a)
+}
+var a = 3
+var obj = {
+    a:2,
+    foo:foo
+}
+obj.foo()
+// 2 obj调用函数
+```
+
+```javascript
+function foo(){
+    console.log(this.a)
+}
+function doFoo(fn){
+    fn()
+}
+var obj = {
+    a:2,
+    foo:foo
+}
+var a = 'global'
+doFoo(obj.foo) // global
+// 这里理解很简单，整个执行过程： fn = obj.foo  fn()
+```
+
+```javascript
+// 以下用伪代码来解释一下为什么匿名函数，this常常指向window
+function setTimeout(fn,delay){
+    fn()
+}
+```
+
+
 
 ---
 
@@ -210,6 +250,7 @@ call 函数实现的方法：
 
 - eval：最古老
 - join 或  toString：解决参数为数组问题（**存在问题，会将数组里面的值转换为字符串**）
+- es6：完美，简单又容易理解
 
 ```javascript
 // eval
@@ -239,11 +280,32 @@ Function.prototype.call3 = function(context){
         arr.push(arguments[i])
     }
     result = context.fn(arr.join(','))
-    
+    // 假设数组中的数据[1,2] 那么经过join => '1,2'
     delete context.fn
     return result
 }
 ```
+
+```javascript
+// es6
+Function.prototype.call3 = function(context){
+    context = context || window
+    context.fn = this
+    var arr = []
+    var result
+    for(var i = 0;i < arguments.length;i++){
+        arr.push(arguments[i])
+    }
+    result = context.fn(...arr)
+    // 假设数组中的数据[1,2] 那么经过join => '1,2'
+    delete context.fn
+    return result
+}
+```
+
+es6 关于 rest 参数的说明
+
+- ES6 引入 rest 参数（形式为`...变量名`），用于获取函数的多余参数，这样就不需要使用`arguments`对象了。rest 参数搭配的**变量**是一个**数组**，该变量将多余的参数放入数组中。
 
 #### apply源码
 
