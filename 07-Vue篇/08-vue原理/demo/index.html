@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +8,20 @@
   <title>Document</title>
   <script src="./js/vue.js"></script>
 </head>
+
 <body>
   <div id="app">
     <p>{{msg}}</p>
   </div>
 </body>
 <script>
-  debugger
+  Vue.config.performance = true
   new Vue({
-    el:'#app',
-    data:{
-      msg:'hello world'
+    el: '#app',
+    data: {
+      msg: 'hello world'
     }
   })
 </script>
+
 </html>
