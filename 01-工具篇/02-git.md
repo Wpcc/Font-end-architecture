@@ -96,6 +96,26 @@ git remote add origin yourlibarary@example.com
 git push -u origin master
 ```
 
+**可能出现的问题：**
+
+如果第一次提交，本地项目和远程仓库项目不一致，可能会报错`Updates were rejected because the remote contains work...`
+
+这个时候需要在**提交**前，拉取一下远程仓库：
+
+```shell
+git pull origin master  ## 拉取远程仓库到本地
+```
+
+如果出现以下错误`Git :fatal: refusing to merge unrelated histories`
+
+也就是说远程仓库和本地仓库具有不同的提交历史，那么我么可以运行不相关历史提交，强制合并代码，从而解决该问题：
+
+```shell
+pull origin master --allow-unrelated-histories
+```
+
+
+
 **之后提交步骤：**
 
 ```shell
@@ -103,6 +123,10 @@ git add -A
 git commit -m"第二次提交文件"
 git push
 ```
+
+
+
+
 
 ### 分支
 

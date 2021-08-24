@@ -12,13 +12,7 @@
 
 #### VSCode
 
-- 安装插件
-  - ESLint：语法检测
-  - open in browser：编译器中打开项目文件
-  - vue：Vue语法高亮
-  - Vetur：Vue语法高亮
-
-
+- 参考01-工具篇/05-编译器
 
 ### 项目创建
 
@@ -108,28 +102,6 @@ module.exports = {
             '@':resolve('src')
         }
     }
-  },
-  // 配置 webpack-dev-server 行为。
-  devServer: {
-    // open: false, // 本地服务器构建完成后，是否打开默认浏览器
-    host: '0.0.0.0',
-    port: port,
-    // nginx代理配置
-    proxy: {
-      // 这里需修改
-      '/o2cPesm/': {
-        target: process.env.VUE_APP_URL, // 需在全局变量中定义
-        changeOrigin: true,
-      },
-      '/rbsm-api/': {
-        target: process.env.VUE_APP_URL, // 需在全局变量中定义
-        changeOrigin: true,
-        pathRewrite: {
-          '^/Resource': ''
-        }
-      },
-    },
-    before: app => { }
   }
 }
 ```
@@ -270,9 +242,35 @@ created(){
 }
 ```
 
+### API配置
+
+vue项目中通常使用 axios 进行接口访问，在这之前需要对 axios进行一些封装。
+
+```javascript
+// create an axios instance
+const service = axios.create({
+  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  // withCredentials: true, // send cookies when cross-domain requests
+  timeout: 5000 // request timeout
+})
+```
+
 #### 代理
 
-为了简化，以及方便修改域名。在vue项目中通常使用代理，配置文件为`vue.config.js`，以下面配置为例：
+如果一个项目涉及到多个域名，则可以利用 ngix 代理 + axios 配置进行处理：
+
+- axios
+
+```javascript
+// axios
+const request = axios.create({
+  baseURL: process.env.NODE_ENV === 'dev' ? '/' : process.env.VUE_APP_BASE_URL,
+  withCredentials: true,
+  timeout: 60000
+})
+```
+
+- vue.config.js
 
 ```javascript
 // 根据不同的全局变量，修改不同的端口号
@@ -304,22 +302,25 @@ const proxy_carInfo = process.env.VUE_APP_PROXY_CARINFO
 
 当`webpack`打包工具在碰到以`/map`和`/pfsm`开头的时候，会去寻找定义在不同环境中的环境变量。
 
-**但是在生产环境中，并不会使用代理**，这个时候需要我们配置axios，当在生产环境的时候，使用适当的域名，具体配置如下：
-
-```javascript
-import axios from 'axios'
-import { Message } from 'element-ui'
-
-const request2 = axios.create({
-  baseURL: process.env.NODE_ENV === 'dev' ? '/' : process.env.VUE_APP_PROXY_CARINFO,
-  withCredentials: true,
-  timeout: 60000
-})
-```
-
 查看配置文件中的`request.js`文件，可以了解到详细配置。
 
+### 路由
 
+命令语句：
+
+```shell
+vue add router
+```
+
+### hash模式和history模式
+
+- hash模式
+  - 也就是路由的本质，路径会带有`#`，如`http://127.0.0.1/#/a`
+- history模式
+  - 会消除`#`
+  - history需要后端配合进行一定的修改
+
+两者的具体实现和区别可以查看[官网](https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90)
 
 ### 压缩可视化
 
