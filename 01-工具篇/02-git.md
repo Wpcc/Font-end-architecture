@@ -111,7 +111,7 @@ git pull origin master  ## 拉取远程仓库到本地
 也就是说远程仓库和本地仓库具有不同的提交历史，那么我么可以运行不相关历史提交，强制合并代码，从而解决该问题：
 
 ```shell
-pull origin master --allow-unrelated-histories
+git pull origin master --allow-unrelated-histories
 ```
 
 
