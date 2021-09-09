@@ -238,3 +238,7 @@ git merge <分支名>
 - 不使用ssh的方式，但每次提交代码都不需要输入用户名和密码
   
   - https://jingyan.baidu.com/article/4b07be3cf27d8148b280f36a.html
+
+- github网站不支持密码登录（使用token）
+  - https://docs.github.com/cn/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+
