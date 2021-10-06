@@ -9,17 +9,15 @@
 
 <body>
 	<div id="app">
-		{{msg}}
+		{{test}}
 	</div>
 </body>
 <script>
-	Vue.config.performance = true
-	new Vue({
-		el: '#app',
-		data: {
-			msg: 'hello Vue'
-		}
-	})
+	let a = {
+		name: 'wpc'
+	}
+	let isHas = 'name' in a
+	console.log(isHas)
 </script>
 
 </html>

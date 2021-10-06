@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>el</title>
+	<script src="./lib/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+	</div>
+</body>
+<script>
+
+	let Target
+
+	// 依赖收集函数
+	function walk (data) {
+		for (let key in data) {
+			const dep = []
+			let val = data[key]
+			// 如果 val 是对象，递归调用 walk 函数将其转为访问器属性
+			const nativeString = Object.prototype.toString.call(val)
+			if (nativeString === '[object Object]') {
+				walk(val)
+			}
+			Object.defineProperty(data, key, {
+				set (newVal) {
+					if (newVal === val) return
+					val = newVal
+					dep.forEach(fn => fn())
+				},
+				get () {
+					dep.push(Target)
+					return val
+				}
+			})
+		}
+	}
+
+	// 模仿监听器
+	function $watch (exp, fn) {
+		Target = fn
+		let pathArr,
+				obj = data
+		// 如果 exp 是函数，直接执行该函数
+		if (typeof exp === 'function') {
+			exp()
+			return
+		}
+		if (/\./.test(exp)) {
+			pathArr = exp.split('.')
+			pathArr.forEach(p => {
+				obj = obj[p]
+			})
+			return
+		}
+		data[exp]
+	}
+
+	// ----------  开始
+	const data = {
+		name: '霍春阳',
+		age: 24
+	}
+
+	function render () {
+		return document.write(`姓名：${data.name}; 年龄：${data.age}`)
+	}
+
+	walk(data)
+	$watch(render, render)
+
+	data.name = 'wpc'
+
+	// 读取的时候走一趟render  设置name的时候再走一次render
+
+</script>
+
+</html>

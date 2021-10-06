@@ -9,17 +9,19 @@
 
 <body>
 	<div id="app">
-		{{msg}}
+		{{test}}
 	</div>
 </body>
 <script>
-	Vue.config.performance = true
-	new Vue({
+	let vm = new Vue({
 		el: '#app',
 		data: {
-			msg: 'hello Vue'
+			test: 1
 		}
 	})
+	vm.$data.test = 2
+	console.log(vm)
+
 </script>
 
 </html>

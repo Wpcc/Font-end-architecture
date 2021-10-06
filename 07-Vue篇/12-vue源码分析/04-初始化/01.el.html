@@ -9,17 +9,18 @@
 
 <body>
 	<div id="app">
-		{{msg}}
 	</div>
 </body>
 <script>
-	Vue.config.performance = true
-	new Vue({
+	let vm = new Vue({
 		el: '#app',
 		data: {
-			msg: 'hello Vue'
+			test: 1
 		}
 	})
+	console.log(vm)
+	console.log(vm.$options.render)
+
 </script>
 
 </html>
