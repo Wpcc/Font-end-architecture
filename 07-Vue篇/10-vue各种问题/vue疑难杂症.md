@@ -4,6 +4,8 @@
 
 `Code -> preferences -> Settings -> User`，或者直接搜索`javascript.validate`，默认是`Enable`，把勾选去掉。
 
+
+
 ### vue按钮样式切换
 
 通过HTML5提供的classList进行css类的添加和删除，代码如下：
@@ -16,6 +18,24 @@ handleClick(e) {
     })
     // 添加当前点击dom节点的样式
     e.target.classList.add('clicked')
+}
+```
+
+
+
+### lodash
+
+vue 使用lodash中的节流和防抖，需要将节流防抖直接定义在对象上，传入的函数应该为普通函数，这样this才会绑定到vue上。
+
+```javascript
+import _ from 'lodash'
+export default{
+  methods:{
+    click:_.throttle(function(){
+      console.log('hello')
+      console.log(this)
+    },1000)
+  }
 }
 ```
 
