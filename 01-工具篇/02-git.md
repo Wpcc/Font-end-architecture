@@ -4,6 +4,10 @@
 
 https://git-scm.com/book/en/v2
 
+### 可视化工具
+
+[sourcetree](https://www.sourcetreeapp.com/)
+
 ### 起步
 
 ![git模型](./img-git/git.png)
