@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>el</title>
+	<script src="./lib/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+
+	</div>
+</body>
+<script>
+	let componentA = {
+		data({ parent }) {
+			return {
+				str: parent
+			}
+		},
+		props: ['parent'], // 初始化props早于data，同时合并数据，传递了this也就是vm对象，所以可以通过参数拿取
+		template: '<p>{{str}}</p>'
+	}
+	let vm = new Vue({
+		data: {
+			parent: 'parent'
+		},
+		components: {
+			componentA
+		},
+		template: '<component-a :parent="parent"/>'
+	}).$mount('#app')
+</script>
+
+</html>

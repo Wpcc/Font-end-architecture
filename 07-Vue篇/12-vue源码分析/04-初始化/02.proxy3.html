@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>el</title>
+	<script src="./lib/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		{{Math.ceil(12.5)}}
+	</div>
+</body>
+<script>
+	/*	
+		proxy代理options中的数据，最后渲染到页面
+		vue 可以直接渲染 js 中的保留字段，如 Math，Number	
+		这是因为有时候我们需要用到 window 上的全局方法
+	*/
+	let vm = new Vue({
+		el: '#app'
+	})
+
+</script>
+
+</html>

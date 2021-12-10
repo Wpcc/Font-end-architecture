@@ -9,15 +9,26 @@
 
 <body>
 	<div id="app">
-		{{test}}
+
 	</div>
 </body>
 <script>
-	let a = {
-		name: 'wpc'
+	// 代理 类似于Object.defineProperty
+	var person = {
+		name: 'zhangsan'
 	}
-	let isHas = 'name' in a
-	console.log(isHas)
+	var proxy = new Proxy(person, {
+		get: function (target, propKey) {
+			if (propKey in target) {
+				return target[propKey] + 'proxy';
+			} else {
+				throw new ReferenceError("Prop name \"" + propKey + "\" does not exist.");
+			}
+		}
+	})
+
+	console.log(person.name)
+	console.log(proxy.name)
 </script>
 
 </html>

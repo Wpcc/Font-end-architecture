@@ -35,9 +35,17 @@
 	// 创建 Parent 实例，并挂载到一个元素上。
 	var p = new Parent().$mount('#parent')
 	var c = new Child().$mount('#child')
-	console.log(Parent.options.data())
-	console.log(Child.options.data())
-	console.log(p.$options.data())
+
+	console.log('Parent:', Parent.super)
+	console.log('Child:', Child.superOptions)
+
+	// 如果 childVal 存在，而 parentVal 不存在，则返回 childval
+	console.log('Parent上的data：', Parent.options.data)
+
+	// childVal 和 parentVal 都存在，返回 mergeDataFn
+	console.log('Child上的data：', Child.options)
+
+	console.log(p.$options)
 	console.log(c)
 </script>
 

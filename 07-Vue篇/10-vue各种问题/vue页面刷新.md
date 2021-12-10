@@ -73,3 +73,26 @@ export default {
 }
 ```
 
+**provide 和 inject 不支持数据响应式。**
+
+如果需要传递响应式数据，则需要将数据包裹在对象中：
+
+```javascript
+provide(){
+    return {
+        proObj
+    }
+},
+data(){
+    return {
+        proObj:{}
+    }
+}
+// 设置数据
+this.$set(proObj,'',)
+```
+
+```javascript
+inject:['proObj']
+```
+
