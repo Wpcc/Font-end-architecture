@@ -29,10 +29,10 @@
 				set (newVal) {
 					if (newVal === val) return
 					val = newVal
-					dep.forEach(fn => fn())
+					dep.forEach(fn => fn()) // 触发依赖
 				},
 				get () {
-					dep.push(Target)
+					dep.push(Target) // 收集依赖
 					return val
 				}
 			})
@@ -49,8 +49,8 @@
 			exp()
 			return
 		}
-		if (/\./.test(exp)) {
-			pathArr = exp.split('.')
+		if (/\./.test(exp)) { // 读取 a.b.c 这种数据
+			pathArr = exp.split('.') // [a,b,c]
 			pathArr.forEach(p => {
 				obj = obj[p]
 			})
