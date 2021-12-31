@@ -13,6 +13,13 @@
 	</div>
 </body>
 <script>
+	/*
+		el 和 mount：vue 编译模板后挂载的地方，该地方的节点将会被替换点，故节点不能为html和body、
+		当我们创建一个 vue 实例时，
+		没有 template 则会将 el.outerHTML 作为模板
+		如果有 template 则会将 el 节点替换
+		通过下面示例 可以体会两者的不同之处
+	*/
 	Vue.config.performance = true
 	new Vue({
 		el: '#app',
@@ -20,6 +27,13 @@
 			msg: 'hello Vue'
 		}
 	})
+	// new Vue({
+	// 	el: '#app',
+	// 	data: {
+	// 		msg: 'hello Vue'
+	// 	},
+	// 	template:'<div class="tem">{{msg}}</div>'
+	// })
 </script>
 
 </html>

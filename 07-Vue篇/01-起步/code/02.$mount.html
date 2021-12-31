@@ -11,6 +11,12 @@
 		</div>
 	</body>
 	<script>
+		/*
+			通过源码可以得知 挂载节点的本质是调用$mount
+			在初始化过程中 会判断用户是否传递了 el 参数
+			如果传递了，则调用 $mount
+			反之，会在初始完之后调用 $mount
+		*/ 
 		new Vue({
 			data:{
 				msg:'hello Vue'

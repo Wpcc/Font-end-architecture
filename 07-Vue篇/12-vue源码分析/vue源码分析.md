@@ -1,25 +1,81 @@
 # Vue源码分析
 
-### 装载
+### 定位
 
-**给原型添加方法和属性：**
+这里以浏览器完整版为例，即`src/platforms/web/entry-runtime-with-compiler`。
 
-`instance/index.js`文件主要是给Vue的原型添加方法和属性
+通过寻找 `Vue` 的来源，来定位整个项目的起始位置：
 
+- `entry-runtime-with-compiler` 
 
+- `./runtime/index.js` 
 
-**给构造函数添加方法和属性：**
+- `../../core/index.js`
+- `../../instance/index.js`
 
-`core/index.js`文件主要是给Vue构造函数本身添加方法和属性
+### 开始
 
+**instance/index.js**
 
+该文件代码代表着`Vue`项目的开端，那么通过代码我们来看看它做了哪些事情：
 
-**给特定平台添加方法和属性：**
+- 定义了`Vue`构造函数
+- 装载了`Vue.prototype`原型
 
-`platforms/web/runtime/index.js`给浏览器平台添加特定的方法和属性
+**1. 定义Vue构造函数**
 
+```javascript
+function Vue (options) {
+  if (process.env.NODE_ENV !== 'production' &&
+    !(this instanceof Vue)
+  ) {
+    warn('Vue is a constructor and should be called with the `new` keyword')
+  }
+  this._init(options)
+}
+```
 
+即：当我们创建一个`Vue`的实例，会执行`this._init`方法。
 
-**给Vue添加编译器：**
+**2. 装载Vue.prototype**
 
-`platforms/web/entry-runtime-with-compiler.js`给Vue添加编译器用来编译vue模板
+```javascript
+initMixin(Vue)
+stateMixin(Vue)
+eventsMixin(Vue)
+lifecycleMixin(Vue)
+renderMixin(Vue)
+```
+
+- `initMixin(Vue)`：给原型添加`_init`方法
+
+```javascript
+export function initMixin(Vue){
+    Vue.prototype._init = function(){ //省略
+    }
+}
+```
+
+- `stateMixin(Vue)`
+
+```javascript
+export function stateMixin(Vue){ // 主要和数据有关
+   // 省略部分代码
+    Object.defineProperty(Vue.prototype,'$data',dataDef) // $data为只读属性
+    Object.defineProperty(Vue.prototype, '$props', propsDef) // $props为只读属性
+    
+    Vue.prototype.$set = set // 定义$set函数
+    Vue.prototype.$delete = del // 定义$delete函数
+    Vue.prototype.$watch = function(){} // 定义$watch函数
+}
+```
+
+- `eventsMixin(Vue)`
+
+```javascript
+export function eventsMixin(Vue){ // 主要和事件有关
+    Vue.prototype.$on = function(){} //
+    Vue.prototype.$once = function(){}
+}
+```
+
