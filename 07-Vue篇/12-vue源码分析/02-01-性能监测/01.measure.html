@@ -11,6 +11,9 @@
 </body>
 <script>
   performance.mark('start')
+  setTimeout(() => {
+    
+  }, 1000);
   performance.mark('end')
   let time = performance.measure('测量时间：','start','end')
   console.log(time)
