@@ -214,7 +214,9 @@ var obj = {
 setTimeout(foo.bind(obj),1000) // 传入绑定后的函数，故此时this不会随函数赋值而丢失
 ```
 
+### 箭头函数
 
+插个知识点，箭头函数无法使用call/apply/bind改变this的指向。
 
 ### new 绑定
 

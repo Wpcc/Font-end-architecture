@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ a }}
+    <my-com></my-com>
+  </div>
+  <template id="myTem">
+    <h1>{{ msg2 }}</h1>
+  </template>
+</body>
+<script>
+  /*
+  provide:
+    这里需要注意 provide 无法直接使用 this 进行初始化，
+      这是因为provide进行数据合并的时候，data 还没有初始化
+      所以如果要使用data中的数据，传递一个函数,此处不能使用箭头函数，因为使用了call
+      在初始化的时候，会先初始化data再初始化provide
+    
+  inject:
+    两种写法：
+      数组写法 ['msg']
+      对象写法：{msg2:{from:'msg'}} 可以重新命名
+  
+  */
+  var vm = new Vue({
+    el:'#app',
+    provide:function(){
+      return {
+        msg:this.a
+      }
+    },
+    data:{
+      a:'hello'
+    },
+    components:{
+      myCom:{
+        inject:{
+          msg2:{
+            from:'msg'
+          }
+        },
+        template:'#myTem',
+        created(){
+          console.log('msg:',this.msg)
+        }
+      }
+    }
+  })
+
+</script>
+</html>
