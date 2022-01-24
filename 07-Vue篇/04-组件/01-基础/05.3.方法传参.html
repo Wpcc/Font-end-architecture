@@ -27,6 +27,7 @@ var myCom = {
 	template:'#myTemplate',
 	methods:{
 	  sub(){
+      console.log(this)
 	    this.$emit('callback',this.msg)
 	  }
 	}
