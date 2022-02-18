@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script type="module">
+	// ESM导出的值为引用，故修改原始值，导出的值也修改
+
+	import obj from './content.js'
+	import {content} from './content.js'
+
+	console.log(content)
+	console.log(obj.name)
+
+	setTimeout(() => {
+		console.log(content)
+		console.log(obj.name)
+	},2000)
+</script>
+</html>

@@ -57,13 +57,16 @@ export default{
 
     ```javascript
     /*
-    	会遇到的问题，import无法导入动态组件
-    	component: () => import('@/views/demo') 更改为
+    	会遇到的问题，import导入组件会报错
+    	component: () => import('@/views${item.path}') 更改为
     	component: (resolve) => require([`@/views${item.path}`], resolve)
+    	
+    	问题推导：import本质应该是ESM，即import something from 'something'
+    	其中from后面跟的只能是字符串，所以import动态加载不能使用变量
     */ 
     
     ```
-
+    
     
 
 vue使用动态路由，注销用户后，重新登录，该用户会拥有之前用户的路由页面，这是因为`addRoutes`并不会清除上一次用户的路由状态，刷新后才会清除。

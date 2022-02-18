@@ -1,15 +1,15 @@
 # ES6
 
-### 参考资料
+## 参考资料
 
 - https://es6.ruanyifeng.com/#docs/async
 
-### 什么是ES6
+## 什么是ES6
 
 - 2015年6月正式发布的JavaScript语言标准，ES2015有称呼为ES6。
 - JavaScript语言的一个版本
 
-### 数据类型
+## 数据类型
 
 新增symbol数据类型，表示独一无二的值。
 
@@ -18,7 +18,7 @@ let a = Symbol('a') // 字符串为描述的值，便于区分
 let b = Symbol('b') // 字符串为描述的值，便于区分
 ```
 
-### 字符串
+## 字符串
 
 **template string：模板字符串**
 
@@ -46,8 +46,7 @@ world!`
 console.log(a) // 带回车格式的 hello world！
 ```
 
-
-### 变量
+## 变量
 
 **let,const**
 
@@ -99,9 +98,7 @@ a = 6
 console.log(a) // Assignment to constant variable
 ```
 
-
-
-### 函数
+## 函数
 
 **arrow function 又名箭头函数**，你可以将它当做ES5中匿名函数的简写。
 
@@ -172,7 +169,7 @@ person.say() // person
 - 箭头函数没有 arguments，可以使用 rest 获取参数代替
 - 箭头函数不能当做构造函数，即不能使用 new
 
-### 参数
+## 参数
 
 **default，rest**
 
@@ -215,7 +212,7 @@ function biggest(...num){
 }
 biggest(3,2,1,4)
 ```
-### 解构
+## 解构
 
 **destructuring**
 
@@ -242,7 +239,7 @@ let ls = person.ls // ES5
 let {zs,ls} = zoo // ES6
 ```
 
-### 类
+## 类
 
 **class,extends,super：类，继承，super关键字（超类）**
 
@@ -337,7 +334,7 @@ let animal1 = new Animal()
 animal1.say() // 
 ```
 
-### 模块化
+## 模块化
 
 **两种规范：AMD规范和CommonJS规范**
 
@@ -459,7 +456,7 @@ import some from './comment.js'
 
 当使用浏览器加载模块时，需要设置`type="module"`，并且无法使用本地文件，需要用服务器代理，这是因为设置`type="module"`后，script存在跨越。
 
-### Promise 
+## Promise 
 
 - 方便书写
 -  `.all` 当所有异步接口成功才调用`then`
@@ -479,11 +476,11 @@ let p2 = function (){
 Promise.all([p1()])
 ```
 
-#### async 和 await
+### async 和 await
 
 - async 和 await 一般用来搭配 Promise ，并且 await 必须使用在异步函数中。具体查看await.html，async 可以将同步函数更改为异步函数
 
-#### await处理错误方案
+### await处理错误方案
 
 ```vue
 <!--
@@ -540,15 +537,13 @@ export default {
 </script>
 ```
 
-
-
-#### 接口依赖
+### 接口依赖
 
 假设有a / b / c 三个接口，某个**函数**需要等该三个接口调用完毕再执行，这个时候可以使用allSettled或all进行封装。（如需要在地图上渲染一段路径，a拿到载重点，b拿到停车点，c拿到轨迹，map函数渲染整个数据点。）
 
 如果以上三个接口，b 接口依赖 a 接口数据，c 接口依赖 b 接口数据，那么此时用 await 进行封装。
 
-# 附加：
+
 
 ## CommonJS详解
 
@@ -731,13 +726,25 @@ console.log('this is b.js');
 
 ### 区别
 
-CommonsJS值输出的是**值的拷贝**，这样当值为简单的数据类型的话，改变原始模块中的值，当前模块的值并不会有所变化，当然数据类型为引用类型（对象，数组，函数）则另算。
-
-ESM输出的则是值的**引用**。需要注意地是默认导出的值，内部无法修改（很奇怪）。
-
-ESM导出的值，在外部模块中无法修改，相当于用const定义。
+- 模块的依赖关系
+  - ESM编译时就能确定模块的依赖关系
+  - CommonJS运行时才能确定依赖关系
 
 ```javascript
-// comment.js
+/*
+let name = './content.js'
+let {content} = require(name) // 可以进行导入
+import {content} from name // 无法导入，换言之import导入的路径不能用变量表示
+*/
 ```
+
+- 值的类型
+
+  - CommonJS输出的是值的**拷贝**。这样当值为简单的数据类型的话，改变原始模块中的值，当前模块的值并不会有所变化，当然数据类型为引用类型（对象，数组，函数）则另算。
+
+  - ESM输出的是值的**引用**。
+
+> ESM需要注意的是，当值导入出去后，相当于用const定义了变量，这意味着外部无法更改内部变量。
+
+**不管是哪种导出，想实现的方案肯定是导出的变量不能影响内部变量，所以CommonJS使用的是缓存也就是拷贝，而ESM问世的晚，使用引用让内部变量更改可以影响外部变量，使用const让外部变量无法影响到内部变量。**
 
