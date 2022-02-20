@@ -98,7 +98,7 @@ export function lifecycleMixin(Vue){ // 和生命周期有关
 - `renderMixin(Vue)`
 
 ```javascript
-export function renderMixin(Vue){
+export function renderMixin(Vue){ // 和渲染函数有关
     installRenderHelpers(Vue.prototype)
     Vue.prototype.$nextTick = function(fn){}
     Vue.prototype._render = function(){}
@@ -282,7 +282,7 @@ Vue.options = {
 
 ### entry-runtime-with-compiler
 
-通过文件名对比`entry-runtime-with-compiler`和`runtime/index.js`文件名对比，我们知道该文件主要是为了给Vue添加编译模板的功能。
+通过文件名对比`entry-runtime-with-compiler`和`runtime/index.js`文件名对比，我们知道该文件主要是为了**给Vue添加编译模板的功能**。
 
 这是因为，当我们在使用打包工具`webpack`或者`gulp`编译代码的时候，这些编译会自动编译模板代码，减少引入Vue的体积。
 
@@ -310,7 +310,9 @@ let vm = new Vue(){
 该程序分为两部分：
 
 - 创建Vue实例
+  - 处理options参数
 - 调用$mount函数
+  - 编译模板
 
 **创建Vue实例**
 
@@ -354,17 +356,57 @@ options
 
 ##### initProxy
 
+- 对vm上的属性进行代理，后续渲染时使用
+
+```javascript
+initProxy = function initProxy (vm) {
+    if (hasProxy) {
+        // determine which proxy handler to use
+        const options = vm.$options
+        const handlers = options.render && options.render._withStripped
+        ? getHandler
+        : hasHandler
+        vm._renderProxy = new Proxy(vm, handlers)
+    } else {
+        vm._renderProxy = vm
+    }
+}
+```
+
+
+
 ##### initLifecycle
+
+- 处理继承关系，同时给vm添加一些属性
+
+```javascript
+// 省略
+```
 
 ##### initEvens
 
+- 添加事件相关属性
+
+```javascript
+// 省略
+```
+
 ##### initRender
+
+- 初始化渲染相关的函数，主要是渲染函数转变为虚拟DOM阶段
 
 ##### callHook(vm,'beforeCreate')
 
+- 调用生命周期函数
+
 ##### initInjections
 
+- 处理injections参数
+
 ##### initState
+
+- **处理props、methods、data、computed、watch**
+- **给数据添加响应式**
 
 ##### initProvide
 
