@@ -393,7 +393,45 @@ initProxy = function initProxy (vm) {
 
 ##### initRender
 
-- 初始化渲染相关的函数，主要是渲染函数转变为虚拟DOM阶段
+- 主要给Vue添加**抽象语法树转换成渲染函数**的函数
+
+  - 比如`_c`函数
+
+  ```javascript
+  vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false)
+  ```
+
+  - 其余
+
+  ```javascript
+  // 添加其余渲染转换函数
+  installRenderHelpers(Vue.prototype)
+  ```
+
+  ```javascript
+  // instance/render-helpers/index.js文件
+  export function installRenderHelpers (target: any) {
+    target._o = markOnce
+    target._n = toNumber
+    target._s = toString
+    target._l = renderList
+    target._t = renderSlot
+    target._q = looseEqual
+    target._i = looseIndexOf
+    target._m = renderStatic
+    target._f = resolveFilter
+    target._k = checkKeyCodes
+    target._b = bindObjectProps
+    target._v = createTextVNode
+    target._e = createEmptyVNode
+    target._u = resolveScopedSlots
+    target._g = bindObjectListeners
+    target._d = bindDynamicKeys
+    target._p = prependModifier
+  }
+  ```
+
+  
 
 ##### callHook(vm,'beforeCreate')
 
@@ -413,4 +451,10 @@ initProxy = function initProxy (vm) {
 ##### callHook(vm,'created')
 
 ### 调用mount方法
+
+调用mount方法主要是为了解析模板字符串，具体包括为：
+
+- 将模板字符串转换为抽象语法树（AST）
+- 将抽象语法书转换为渲染函数
+- 通过渲染函数生成虚拟DOM
 
