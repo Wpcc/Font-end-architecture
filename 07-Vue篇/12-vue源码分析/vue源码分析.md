@@ -450,11 +450,122 @@ initProxy = function initProxy (vm) {
 
 ##### callHook(vm,'created')
 
-### 调用mount方法
+## 调用mount方法
 
-调用mount方法主要是为了解析模板字符串，具体包括为：
+调用mount方法主要是为了解析模板字符串，并生成”依赖“（响应式中收集的依赖）：
+
+### 解析模板字符串
 
 - 将模板字符串转换为抽象语法树（AST）
-- 将抽象语法书转换为渲染函数
+- 将抽象语法树转换为渲染函数
 - 通过渲染函数生成虚拟DOM
+
+#### entry-runtime-with-compiler
+
+- 存储`$mount`函数
+
+```javascript
+const mount = Vue.prototype.$mount
+```
+
+- 重写`$mount`函数，添加模板编译功能
+  - render 就是编译模板得到的 渲染函数字符串
+  - **赋值给`options.render`，故后续可以通过options获取**
+  - 解释一下，一般打包环境下，通过打包软件可以进行模板编译，所以运行时版本没有编译器，这里不做过多解释
+
+```javascript
+Vue.prototype.$mount = function (
+  el?: string | Element,
+  hydrating?: boolean
+): Component {
+    if(!options.render){ // 如果渲染函数不存在
+        if(template){
+            const { render, staticRenderFns } = compileToFunctions(template, {
+                outputSourceRange: process.env.NODE_ENV !== 'production',
+                shouldDecodeNewlines, // 解决浏览器的怪异行为
+                shouldDecodeNewlinesForHref, // 解决浏览器的怪异行为
+                delimiters: options.delimiters, // 改变纯文本插入分隔符 即 {{}}
+                comments: options.comments // 设置为true，保留渲染模板中的注释
+            }, this)
+            options.render = render
+      		options.staticRenderFns = staticRenderFns
+        }
+    }
+    return mount.call(this,el,hydrating)
+}
+```
+
+- 调用运行时的`$mount`继续处理
+
+#### runtime/index
+
+此处代码很简单，转手开始调用`mountComponent`:
+
+```javascript
+Vue.prototype.$mount = function (
+  el?: string | Element,
+  hydrating?: boolean
+): Component {
+  el = el && inBrowser ? query(el) : undefined
+  return mountComponent(this, el, hydrating)
+}
+```
+
+#### instance/lifecycle
+
+```javascript
+// 简化后的代码
+export function mountComponent(vm,el,hydrating){
+    updateComponent = () => {
+        const vnode = vm._render() // 通过渲染函数生成虚拟DOM
+        vm._update(vnode, hydrating) // 挂载虚拟DOM
+    }
+    // Watcher 就是处理依赖的函数，我们下面继续讲解
+    new Watcher(vm, updateComponent, noop, {
+       before () {
+         if (vm._isMounted && !vm._isDestroyed) {
+           callHook(vm, 'beforeUpdate')
+         }
+       }
+     }, true /* isRenderWatcher */)
+}
+```
+
+
+
+### 生成依赖
+
+生产一个watcher，换言之生产一个依赖
+
+```javascript
+new Watcher(vm, updateComponent, noop, {
+    before () {
+        if (vm._isMounted && !vm._isDestroyed) {
+            callHook(vm, 'beforeUpdate')
+        }
+    }
+}, true /* isRenderWatcher */)
+```
+
+#### observer/watcher
+
+- **访问响应式数据，收集依赖**
+
+```javascript
+// 简化代码
+export default class Watcher {
+   constructor(vm,expOrFn,cb,options,isRenderWatcher){
+      this.value = this.lazy // 渲染函数也就是 updateComponent 的返回值为 undefined
+      ? undefined
+      : this.get()
+   }
+    get(){
+        pushTarget(this) // 添加目标依赖
+        value = this.getter.call(vm, vm) // 访问响应式数据
+        popTarget() // 弹出目标依赖
+    }
+}
+```
+
+
 
