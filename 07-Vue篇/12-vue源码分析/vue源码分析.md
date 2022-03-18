@@ -357,6 +357,9 @@ options
 ##### initProxy
 
 - 对vm上的属性进行代理，后续渲染时使用
+  - 使用 proxy 进行代理
+    - hasHandler 使用 has ：主要对对象 in 操作符代理
+    - getHandler 使用 get ： 主要对对象 访问进行代理
 
 ```javascript
 initProxy = function initProxy (vm) {
