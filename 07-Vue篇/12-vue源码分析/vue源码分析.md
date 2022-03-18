@@ -1,5 +1,34 @@
 # Vue源码分析
 
+## render
+
+createElement：创建虚拟DOM
+
+## patch
+
+要想弄清楚patch，需要从分析`mountComponent`开始：
+
+- 获取el中的DOM，并赋值给`vm.$el`
+  - 通过该dom获取外层的`body`，这样当虚拟dom（vnode）生成dom后，挂载到`vm.$el`上，也就是`body`上
+
+- 在`mountComponent`中获取`render`函数
+  - 调用`render`函数生成虚拟dom（vnode）
+- 封装`updateComponent`函数
+  - createElm：创建节点
+  - removeNode：删除节点
+  - patchVnode：更新节点
+
+```javascript
+// 将虚拟DOM挂载到页面上
+updateComponent = function () {
+    vm._update(vm._render(), hydrating);
+};
+```
+
+
+
+# 完整版
+
 ## 定位
 
 这里以浏览器完整版为例，即`src/platforms/web/entry-runtime-with-compiler`。
