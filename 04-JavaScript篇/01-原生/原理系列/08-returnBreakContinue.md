@@ -32,3 +32,4 @@ console.log('global')
 
 
 
+注：arr.forEach中无法使用break和continue，这和该方法封装有关。
