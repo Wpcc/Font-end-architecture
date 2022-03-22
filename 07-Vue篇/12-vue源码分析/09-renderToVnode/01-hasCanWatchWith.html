@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title>
+<style> 
+</style>
+</head>
+<body>
+<section class="left"></section>
+<section class="right"></section>
+</body>
+<script>
+	// has 函数用来监听 in 和 with 函数上的变量
+	// 使用 with 时，会优先加载with代理上的对象
+	let obj = {
+		name:'wpc',
+		say(){
+			console.log('hello')
+		},
+		work(){
+			console.log('i like work')
+		}
+	}
+	let age = 18
+	let name = 'wz'
+	let objProxy = new Proxy(obj,{
+		has:function(target,key){
+			console.log('has')
+			let has = key in target
+			return has
+		}
+	})
+	function _c(){
+		with(this){
+			say(work())
+			return name + age
+		}
+	}
+	debugger
+	let person = _c.call(objProxy)
+	objProxy.name
+	console.log(person)
+</script>
+<style>
+
+</style>
+</html>
