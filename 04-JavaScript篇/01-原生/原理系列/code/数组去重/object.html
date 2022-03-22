@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<style>
+		#app{
+			position: absolute;
+			left: 10px;
+			top: 10px;
+		}
+	</style>
+</head>
+<body>
+</body>
+<script>
+const array1 = [1, 2, {name:'wpc'}, 4,{name:'wpc'}];
+
+function unique(arr,key){
+	let obj1 = {}
+	let obj2 = {}
+	let tempArr = []
+	arr.forEach(item => {
+		if(typeof item === 'object'){
+			 if(!obj1[key]){
+				 obj1[key] = item[key]
+				 tempArr.push(item)
+			 }
+		}else{
+			if(!obj2[item]){
+				obj2[item] = true
+				tempArr.push(item)
+			}
+		}
+	})
+	return tempArr
+}
+
+let uniArr = unique(array1,'name')
+</script>
+</html>

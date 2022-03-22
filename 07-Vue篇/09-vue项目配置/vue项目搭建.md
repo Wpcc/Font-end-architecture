@@ -22,7 +22,14 @@
 
 - sass、sass-loader 
   - 用于翻译`<style lang="sass" scoped></style>`的样式文件
-  - 安装方式`npm i sass sass-loader -D `
+  - 安装方式
+  
+  ```javascript
+  npm i sass@1.29.0 sass-loader@10.x -D
+  // 之所以带版本号，是由于版本过高会导致vue2报 this.getOptions is not a function 错误
+  ```
+  
+  
 
 
 
