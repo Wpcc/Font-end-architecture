@@ -7,14 +7,14 @@
 - mark：打标记
 
   - performance.getEntriesByType('mark')：获取所有类型为 mark 的标记点
-  - performance.getEntriesByName('mark')：获取所有名字为 mark 的标记点
+  - performance.getEntriesByName('start')：获取所有名字为 start 的标记点
 
 - measure：测量两个标记点之间的时间
 
-  - performance.getEntriesByType('measure')：同上
-  - performance.getEntriesByName：同上
+  - performance.getEntriesByType('measure')：可以获取类型为 measure 的标记点
+  - performance.getEntriesByName('time')：可以获取名字为 time 的标记点
 
-- 清楚标记点和测量点
+- 清除标记点和测量点
 
   - clearMarks
   - clearMeasures
@@ -98,4 +98,5 @@ if (process.env.NODE_ENV !== 'production') {
 }
 ```
 
-很简单封装，就是判断API是否存在，当调用measure进行测量时顺便清楚mark标记。
+很简单封装，就是判断API是否存在，当调用measure进行测量时顺便清除mark标记。
+
