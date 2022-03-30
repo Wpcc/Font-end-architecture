@@ -12,7 +12,52 @@ core/instance/render.js
 vnode = render.call(vm._renderProxy, vm.$createElement)
 ```
 
-- 这段代码会由`with`触发`Proxy`代理中的`has`
-  - 用来判断调用的函数和变量是否存在于`vm.renderProxy`中
-- 随后开始进行参数赋值，也就是处理参数
+## with和has代理
+
+with 语句，扩展一个语句的作用域链。
+
+- 该作用域中的变量会触发 proxy 代理的 has 函数
+
+比如：
+
+```javascript
+let obj = {
+    name:'zhangsan',
+    age:'18'
+}
+let name = 'lisi'
+let age = '19'
+with(obj){ // with里面将使用obj的作用域
+    console.log(name) // zhangsan
+    console.log(age) // 18
+}
+```
+
+has函数，ES6中的代理函数，用来拦截 in 语句
+
+- 需要注意的是对 for……in 不生效
+
+```javascript
+let obj = {
+    name:'zhangsan',
+    age:'18'
+}
+let objProxy = new Proxy(obj,{
+    has(target,key){
+        console.log('触发has函数')
+        if(key in target){
+            return true
+        }else{
+            return false
+        }
+    }
+})
+console.log('name' in objProxy);
+
+for(let i in obj){ // 对 for……in 不生效
+    console.log(i)
+}
+```
+
+
 
