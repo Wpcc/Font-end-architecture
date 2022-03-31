@@ -12,3 +12,4 @@ async和defer主要针对script标签加载。
 
 
 
+需要注意的是defer 和 async 对加载的script代码有效，而不是script包裹的代码有效。

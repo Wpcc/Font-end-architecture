@@ -7,3 +7,4 @@ function sleep(time){
 }
 sleep(2000)
 console.log('sleep')
+console.log(document.querySelector('#app'))

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script defer>
+			function sleep(time){
+				var start = Date.now()
+				var end = Date.now()
+				while((end - start) <= time){
+					end = Date.now()
+				}
+			}
+			sleep(2000)
+			console.log('sleep')
+			console.log(document.querySelector('#app'))
+		</script>
+	</head>
+	<body>
+		<div id="app">defer</div>
+	</body>
+	<script src="./lib/normal.js"></script>
+</html>
