@@ -6,3 +6,5 @@ say()
 ;(function () {
   console.log("hello")
 })()
+
+let a: string
