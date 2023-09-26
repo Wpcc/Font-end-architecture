@@ -353,7 +353,7 @@ animal1.say() //
 
 
 
-- ConmonJS规范代表：node.js（服务端）
+- CommonJS规范代表：node.js（服务端）
   - 加载（require）
   - 导出（exports）
   - **核心是导出`exports`对象**
