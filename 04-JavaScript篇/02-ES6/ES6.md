@@ -440,7 +440,7 @@ import {a,say,person} from './content.js'
 
 ```javascript
 // 默认导出 comment.js
-export default let content = 'hello'
+export default let content = 'hello' // 无法使用该方法导出
 ```
 
 ```javascript
