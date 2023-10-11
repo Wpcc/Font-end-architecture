@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">{{ store.msg }}</div>
+</body>
+
+<script type="module">
+  import { createApp, ref, watch } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+  import { store } from './store.js'
+
+  createApp({
+    setup() {
+      watch(() => store.msg, (val) => {
+        console.log('msg changed:', val)
+      })
+
+      setTimeout(() => {
+        store.setMsg('changed')
+      }, 2000)
+
+      return {
+        store
+      }
+    }
+  }).mount('#app')
+</script>
+
+</html>
