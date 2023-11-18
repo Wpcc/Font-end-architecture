@@ -1,0 +1,27 @@
+# axios问题
+
+### get请求乱码问题
+
+axios插件get请求使用的是encodeURI进行编码，无法处理像`:`这样的字符串，两者的差异（encodeURIComponent），可以自行搜索。
+故当get参数有些奇怪的字符串的时候往往不能使用内置的请求方式。
+```javascript
+axios({
+  method:'get',
+  url:'xxx',
+  params:{
+    id:'123'
+  }
+})
+```
+这个时候往往可以是采用拼接的方式，避免使用内部axios的转义方式。
+```javascript
+let obj = {
+  id:'123'
+}
+let str = encodeURIcomponent(JSON.stringify(obj))
+axios({
+  method:'get',
+  url:'xxx',
+  params:str
+})
+```
