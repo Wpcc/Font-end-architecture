@@ -82,5 +82,6 @@ export function resetRouter() {
 }
 ```
 
-
+### ref
+ref如果在for循环中，那么获取的值将会是一个数组
 
