@@ -85,3 +85,8 @@ export function resetRouter() {
 ### ref
 ref如果在for循环中，那么获取的值将会是一个数组
 
+### props
+如果传递的props有前后顺序，比如一个prop是参数，另一个prop是后台请求的地址，那么怎么处理这两个参数的关系。
+- 传递之前，可以进行异步
+- 传递过去之后，进行监听
+
