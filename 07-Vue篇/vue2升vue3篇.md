@@ -13,3 +13,9 @@
   + 通过ref可以获取子元素
   + 如果子元素是第三方提供的，那么通过`this.ref[dom].state`可以获取内部数据
   + 通过`this.$.subTree`循环可以获取真个元素
+
+### vue3常见问题
+
+vue3样式穿透
+vue3如果写setup函数，那么组件调用自己怎么调用
+vue3生命周期created的
