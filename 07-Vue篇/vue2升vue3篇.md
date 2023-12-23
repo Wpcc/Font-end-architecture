@@ -16,6 +16,11 @@
 
 ### vue3常见问题
 
-vue3样式穿透
-vue3如果写setup函数，那么组件调用自己怎么调用
-vue3生命周期created的
+- vue3样式穿透
+  + `:deep（）`代替vue2中的`::v-deep /deep/`等
+- vue3如果写setup函数，那么组件调用自己怎么调用
+  + 正常调用，vue会自动将名字注册为组件name，如果使用的是setup
+- vue3生命周期created的
+  + vue3中的setup即是create周期
+- vue3 setup怎么使用ref调用子组件的方法
+  + 需要通过`defineExpose`暴露方法
