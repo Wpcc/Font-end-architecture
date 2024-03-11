@@ -151,3 +151,7 @@ npm config list
   npm owner add <user> <package name> ## 添加管理者
   npm owner rm <user> <package name> ## 删除管理者
   ```
+
+  ### link
+  通过`npm link`创建软链接后，可以通过`npm link [name]`进行包引用。
+  创建软链接可以通过`git config get prefix`获取全局包地址
