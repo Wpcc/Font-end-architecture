@@ -1,0 +1,29 @@
+1、原工程Vue2版本技术栈
+项目使用 vue2 + vue-router + vuex + webpack + @aurora/vue 5.0（AUI2）
+
+2、升级策略
+本工程的Vue3升级秉承改动最少，快速升级的原则，其它项目组可以根据实际需要选择符合自己项目组的升级策略。
+工程升级策略如下：
+- 继续使用webpack（vue-cli），根据后续依赖需求决定是否切换vite 
+- 保留：@aurora/webpack-system-register 2.0.6
+- 继续使用选项式API，不切换Vue3组合式API
+- @aurora/vue 5.0 升级为 @aurora/vue3
+- 继续使用vuex，根据后续需求决定是否切换pinia
+- vuex3.4.0 升级 vuex4.x (nisvue3升级后自动升级)
+- 继续使用vue-router
+- vue-router3.3.4 升级 vue-router4.x （nisvue3升级后自动升级）
+
+3、升级方案
+- 使用nisvue3转换工具进行语法转换
+- 复制原项目并删除业务代码，将升级语法后的页面逐步移入
+- 升级相应版本依赖，并添加对应依赖及配置
+- 具体查看AUI升级
+- 添加生产环境配置项，并重新运行流水线
+
+4、代码迁移
+- 更改deep样式写法
+- 修改路由命名，vue3路由不允许重复命名
+- 如果页面使用了jsx语句，在vue3中需要添加 `<script lang='jsx'>，TypeError: Cannot read property 'content' of null`，该语句报错解决同上，即没有jsx导致，vue3动态组件，dom名必须是component
+- vue2升vue3，不支持过滤器
+- vue2删除$children，可通过`this.$.subTree`获取所有元素并进行遍历
+- 自定义v-model更改为，`props:['modelValue'],emit:['update:modelValue']`
