@@ -245,4 +245,7 @@ git merge <分支名>
 
 - github网站不支持密码登录（使用token）
   - https://docs.github.com/cn/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+ 
+- 如果更改账号密码，可通过如下方式进行设置
+  -  (windows + R) -> "control /name Microsoft.CredentialManager"
 
