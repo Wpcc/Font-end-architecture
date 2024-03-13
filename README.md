@@ -29,3 +29,19 @@
   - `<meta name='viewport' content='width=device-width,initial-scale=1'>`
  
 ## CSS
+- 标准盒模型和IE盒模型
+  - 标准：with(content) + padding + border + margin
+  - IE: width(content + padding + border) + margin
+- 水平居中
+  -  `margin:0 auto`
+  -  `text-align:center`
+- 水平垂直居中
+  - absolute(绝对定位) + margin，缺点需要知道元素的宽高
+  - abosulte(绝对定位) + translate，缺点css3属性，兼容性
+  - flex，给父元素添加`display:flex;justify-content:center;align-items:center`，缺点css3属性，兼容性
+- flex布局
+  - `justify-content`定义主轴对齐方式
+  - `align-items`定义交叉轴对齐方式
+  - 用的比较多：
+    - `flex-wrap:wrap/nowrap`定义是否换行
+    - `flex:1`平分剩余空间，需要注意的是该属性设置在本身元素上而不是父元素，为`flex-grow`
