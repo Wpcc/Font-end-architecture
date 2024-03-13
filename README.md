@@ -19,3 +19,13 @@
   - npm(npx) / yarn / pnpm
 - 是否使用monorepo
   - https://fed.taobao.org/blog/taofed/do71ct/uihagy/
+ 
+## HTML
+- HTML语义化
+  - 便于浏览器、搜索引擎解析，css失效时，页面结构更清晰
+- script标签中async和defer的区别
+  - js语言分为下载和执行
+- HTML页面适应手机移动端
+  - `<meta name='viewport' content='width=device-width,initial-scale=1'>`
+ 
+## CSS
