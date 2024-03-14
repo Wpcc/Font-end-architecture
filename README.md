@@ -75,3 +75,5 @@
 - 相邻元素的margin塌陷（垂直方向）
   - 一种是父元素包含子元素，这个时候通常是`margin-top`塌陷，通过设置父元素为BFC，让两个margin互相不干扰，或设置border让margin不进行接触
   - 另一种是相邻元素的margin塌陷，这种比较复杂，只能设置`dispaly:absolute|fixed`绝对定位，或通过更改元素的`margin-bottom|top`进行调试
+- 如何让字体小于12px？
+  - 一般使用`transform:scale(0.8)`做转换，如果是内联元素，需要将内联元素转换成块级元素`display:block|inline-block`
