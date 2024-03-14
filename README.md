@@ -32,6 +32,13 @@
 - 标准盒模型和IE盒模型
   - 标准：with(content) + padding + border + margin
   - IE: width(content + padding + border) + margin
+- 什么是BFC？
+  - 全称block formatting context（块级格式化上下文），意思创建一个独立的区域，让里面的布局与外部布局相互隔离
+  - 常见创建BFC的方式
+    - 比如：文档根元素（html）
+    - 比如：`overflow:hidden|auto|scroll`，这也是为什么`overflow:hidden`可以清除浮动，因为创建了一个BFC
+    - 比如：绝对/固定定位：`position:absolute|fixed`
+    - 比如：`display:flex`
 - 水平居中
   -  `margin:0 auto`
   -  `text-align:center`
@@ -45,3 +52,23 @@
   - 用的比较多：
     - `flex-wrap:wrap/nowrap`定义是否换行
     - `flex:1`平分剩余空间，需要注意的是该属性设置在本身元素上而不是父元素，为`flex-grow`
+- 为什么要清除浮动？清楚浮动的方式？
+  - 由于浮动会使元素脱离文档流，故原本布局的父元素将会出现高度塌陷的问题。为了让页面更加合理，我们需要清除浮动。
+  - 常用清除浮动的方法：
+    - `both:clear`：一种是在最后一个元素添加清除，另外一种方式是创建一个伪类，添加浮动方式
+    ```css
+    // 伪类
+    .clearfix::after{
+      content:'';
+      height:0;
+      display:block;
+      clear:both;
+    }
+    ```
+    - 创建一个BFC：通常是通过`overflow:hidden`进行清除
+    ```css
+    // 浮动元素的父元素
+    .container{
+      overflow:hidden;
+    }
+    ```
